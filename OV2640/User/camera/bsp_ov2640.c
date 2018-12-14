@@ -1026,10 +1026,11 @@ void OV2640_HW_Init(void)
     
     /***DCMI引脚配置***/
     /* 使能DCMI时钟 */
+//    __HAL_RCC_GPIOF_CLK_ENABLE() ; 
     DCMI_PWDN_GPIO_CLK_ENABLE();
     DCMI_VSYNC_GPIO_CLK_ENABLE();
     DCMI_HSYNC_GPIO_CLK_ENABLE();
-    DCMI_PIXCLK_GPIO_CLK_ENABLE();    
+    DCMI_PIXCLK_GPIO_CLK_ENABLE();
     DCMI_D0_GPIO_CLK_ENABLE();
     DCMI_D1_GPIO_CLK_ENABLE();
     DCMI_D2_GPIO_CLK_ENABLE();
@@ -1155,14 +1156,14 @@ void OV2640_Init(void)
 	DCMI_Handle.Init.ExtendedDataMode = DCMI_EXTEND_DATA_8B;
 	HAL_DCMI_Init(&DCMI_Handle); 	
   
-   	//配置DMA传输，直接配置循环传输即可
-  OV2640_DMA_Config( FSMC_Addr_ILI9806G_DATA,1); 
+//   	//配置DMA传输，直接配置循环传输即可
+//  OV2640_DMA_Config( FSMC_Addr_ILI9806G_DATA,1); 
 	/* 配置中断 */
 	HAL_NVIC_SetPriority(DCMI_IRQn, 5, 0);
 	HAL_NVIC_EnableIRQ(DCMI_IRQn); 	
 
 	//开始传输，数据大小以32位数据为单位(即像素个数/4，LCD_GetXSize()*LCD_GetYSize()*2/4) 
-	OV2640_DMA_Config( FSMC_Addr_ILI9806G_DATA,1);
+	OV2640_DMA_Config( FSMC_Addr_ILI9806G_DATA, 1);
 	 
 }
 
@@ -1177,6 +1178,7 @@ void OV2640_DMA_Config(uint32_t DMA_Memory0BaseAddr,uint32_t DMA_BufferSize)
   /* 配置DMA从DCMI中获取数据*/
   /* 使能DMA*/
   __HAL_RCC_DMA2_CLK_ENABLE(); 
+  
   DMA_Handle_dcmi.Instance = DMA2_Stream1;
   DMA_Handle_dcmi.Init.Channel = DMA_CHANNEL_1;  
   DMA_Handle_dcmi.Init.Direction = DMA_PERIPH_TO_MEMORY;
@@ -1193,12 +1195,12 @@ void OV2640_DMA_Config(uint32_t DMA_Memory0BaseAddr,uint32_t DMA_BufferSize)
 
   /*DMA中断配置 */
   __HAL_LINKDMA(&DCMI_Handle, DMA_Handle, DMA_Handle_dcmi);
-  
-  HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 5, 0);
-  HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
-  
+//  
+//  HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 5, 0);
+//  HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
+//  
   HAL_DMA_Init(&DMA_Handle_dcmi);
-  
+//  __HAL_UNLOCK(&DMA_Handle_dcmi);
   //使能DCMI采集数据
   HAL_DCMI_Start_DMA(&DCMI_Handle, DCMI_MODE_CONTINUOUS, (uint32_t)DMA_Memory0BaseAddr,DMA_BufferSize);
 }
@@ -1703,16 +1705,21 @@ void OV2640_ContrastConfig(uint8_t value1, uint8_t value2)
   OV2640_WriteReg(0x7d, 0x06);
 }
 
-/**
-  * @brief  帧同步回调函数.
-  * @param  None
-  * @retval None
-  */
-void HAL_DCMI_VsyncEventCallback(DCMI_HandleTypeDef *hdcmi)
-{
-  fps++; //帧率计数
-// OV2640_DMA_Config(LCD_FB_START_ADDRESS,LCD_GetXSize()*LCD_GetYSize()/2); 
-//配置DMA传输，直接配置循环传输即可
- OV2640_DMA_Config( FSMC_Addr_ILI9806G_DATA,1); 	  	 
-}
+///**
+//  * @brief  帧同步回调函数.
+//  * @param  None
+//  * @retval None
+//  */
+//void HAL_DCMI_VsyncEventCallback(DCMI_HandleTypeDef *hdcmi)
+//{
+//  fps++; //帧率计数
+//// OV2640_DMA_Config(LCD_FB_START_ADDRESS,LCD_GetXSize()*LCD_GetYSize()/2); 
+////配置DMA传输，直接配置循环传输即可
+// /*DMA会把数据传输到液晶屏，开窗后数据按窗口排列 */
+//// ILI9806G_OpenWindow(0,0,img_width,img_height);	
+// //重新使能帧中断,因为HAL_DCMI_IRQHandler()函数会关闭帧中断
+////   __HAL_DMA_ENABLE(&DMA_Handle_dcmi); //打开DMA 
+//  	OV2640_DMA_Config( FSMC_Addr_ILI9806G_DATA, img_width*img_height/2);
+////    __HAL_DCMI_ENABLE_IT(&DCMI_Handle,DCMI_IT_FRAME);	  	 
+//}
 

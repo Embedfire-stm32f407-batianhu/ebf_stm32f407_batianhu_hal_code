@@ -183,18 +183,18 @@ void SysTick_Handler(void)
 {
 }*/
 
-/**
-  * @brief  DMA中断服务函数
-  * @param  None
-  * @retval None
-  */
+///**
+//  * @brief  DMA中断服务函数
+//  * @param  None
+//  * @retval None
+//  */
 void DMA2_Stream1_IRQHandler(void)
 {
   HAL_DMA_IRQHandler(&DMA_Handle_dcmi);
 }
 
 
-
+extern uint16_t img_width, img_height;
 extern uint8_t fps;
 
 /**
@@ -204,14 +204,26 @@ extern uint8_t fps;
   */
 void DCMI_IRQHandler(void)
 {
-  if(  __HAL_DCMI_GET_FLAG(&DCMI_Handle,DCMI_IT_FRAME) == SET )    
+  if(  __HAL_DCMI_GET_FLAG(&DCMI_Handle,DCMI_FLAG_FRAMERI) == SET )    
 	{
-//////		/*传输完一帧，计数复位*/
-		fps++; //帧率计数
-//	 HAL_DCMI_IRQHandler(&DCMI_Handle);
-    __HAL_DCMI_CLEAR_FLAG(&DCMI_Handle,DCMI_IT_FRAME); 
+////    __HAL_DMA_DISABLE(& DMA_Handle_dcmi); 
+//   	 DCMI->CR&=~(DCMI_CR_CAPTURE);       //关闭捕获
+    fps++; //帧率计数
+    HAL_DCMI_Stop(&DCMI_Handle);
+////   __HAL_DMA_ENABLE(& DMA_Handle_dcmi);
+////     /*DMA会把数据传输到液晶屏，开窗后数据按窗口排列 */
+//////    ILI9806G_OpenWindow(0,0,img_width,img_height);	
+    HAL_DCMI_Start_DMA(&DCMI_Handle, DCMI_MODE_CONTINUOUS, FSMC_Addr_ILI9806G_DATA,1);
+    
+    __HAL_DCMI_CLEAR_FLAG(&DCMI_Handle,DCMI_FLAG_FRAMERI); 
+//      DCMI->CR|=DCMI_CR_CAPTURE;          //DCMI捕获使能
 	}
+//  
+//   HAL_DCMI_Start_DMA(&DCMI_Handle, DCMI_MODE_CONTINUOUS, FSMC_Addr_ILI9806G_DATA,1);
+////  OV2640_DMA_Config( FSMC_Addr_ILI9806G_DATA,1); 	
 //  HAL_DCMI_IRQHandler(&DCMI_Handle);
-//  CAMERA_DEBUG("%d \r\n",*((uint32_t *) (FSMC_Addr_ILI9806G_DATA+1 )));
+//  fps++; //帧率计数
+//  OV2640_DMA_Config( FSMC_Addr_ILI9806G_DATA,1); 
+//  CAMERA_DEBUG("%d \r\n",*((uint32_t *) (FSMC_Addr_ILI9806G_DATA )));
 }
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

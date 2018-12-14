@@ -30,7 +30,7 @@
 uint32_t Task_Delay[NumOfTask]={0};
 uint8_t dispBuf[100];
 uint8_t fps=0;
-
+extern  DMA_HandleTypeDef DMA_Handle_dcmi;
 extern uint16_t img_width, img_height;
 /**
   * @brief  主函数
@@ -38,12 +38,7 @@ extern uint16_t img_width, img_height;
   * @retval 无
   */
 int main(void)
-{
-//  	/*图像大小，修改这两个值即可改变图像的大小*/
-//	//要求为4的倍数
-//	img_width=852;
-//	img_height =480;
-  
+{  
 	OV2640_IDTypeDef OV2640_Camera_ID;	
   /* 系统时钟初始化成216 MHz */
   SystemClock_Config();
@@ -90,8 +85,7 @@ int main(void)
 
     while(1);  
   }
-  
-  OV2640_UXGAConfig();
+   OV2640_UXGAConfig();
    
 	OV2640_Init();  
 
@@ -107,14 +101,16 @@ int main(void)
   ILI9806G_Clear(0,0,LCD_X_LENGTH,LCD_Y_LENGTH);	/* 清屏，显示全黑 */
   ILI9806G_DispStringLine_EN(LINE(0),"BH 4.8 inch LCD + OV2640");
 
-  /*DMA会把数据传输到液晶屏，开窗后数据按窗口排列 */
-  ILI9806G_OpenWindow(0,0,img_width,img_height);	
-
+    /*DMA会把数据传输到液晶屏，开窗后数据按窗口排列 */
+  ILI9806G_OpenWindow(0,0,img_width,img_height);
+  
   while(1)
 	{
 		//使用串口输出帧率
 		if(Task_Delay[0]==0)
-		{					
+		{	
+//      HAL_DCMI_Start_DMA(&DCMI_Handle, DCMI_MODE_CONTINUOUS, FSMC_Addr_ILI9806G_DATA,1);
+      
 			/*输出帧率*/
 			CAMERA_DEBUG("\r\n帧率:%.1f/s \r\n", (double)fps/5.0);
 			//重置
