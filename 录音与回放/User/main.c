@@ -85,11 +85,10 @@ int main(void)
 	TPAD_Init();
 	/* 初始化调试串口，一般为串口1 */
 	 DEBUG_USART_Config();	
-    printf("WM8978录音和回放功能\n");
-    //链接驱动器，创建盘符
+     //链接驱动器，创建盘符
     FATFS_LinkDriver(&SD_Driver, SDPath);
 	//在外部SD卡挂载文件系统，文件系统挂载时会对SD卡初始化
-	res_sd = f_mount(&fs,(TCHAR const*)SDPath,1);
+	res_sd = f_mount(&fs,"0:",1);
 
 	if(res_sd!=FR_OK)
 	{

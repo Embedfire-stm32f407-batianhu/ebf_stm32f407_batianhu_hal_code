@@ -133,7 +133,7 @@ void wm8978_NotchFilter(uint16_t _NFA0, uint16_t _NFA1);
 
 #define I2Sxext_RX_DMA_CHANNEL         DMA_CHANNEL_3
 #define I2Sxext_RX_DMA_STREAM          DMA1_Stream3
-#define I2Sxext_RX_DMA_IT_TCIF         DMA_IT_TCIF3
+#define I2Sxext_RX_DMA_IT_TCIF          DMA_FLAG_TCIF0_3
 #define I2Sxext_RX_DMA_STREAM_IRQn     DMA1_Stream3_IRQn 
 //#define I2Sxext_RX_DMA_STREAM_IRQFUN	 DMA1_Stream3_IRQHandler
 

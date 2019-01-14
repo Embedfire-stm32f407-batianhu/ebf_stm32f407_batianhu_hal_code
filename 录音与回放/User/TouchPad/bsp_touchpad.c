@@ -229,7 +229,7 @@ uint8_t TPAD_Scan(uint8_t mode)
 	/* 获取当前捕获值(返回 sample 次扫描的最大值) */
 	rval=TPAD_Get_MaxVal(sample); 	
 	/* printf打印函数调试使用，用来确定阈值TPAD_GATE_VAL，在应用工程中应注释掉 */
-	printf("scan_rval=%d\n",rval);
+	//printf("scan_rval=%d\n",rval);
 	
 	//大于tpad_default_val+TPAD_GATE_VAL,且小于10倍tpad_default_val,则有效
 	if(rval>(tpad_default_val+TPAD_GATE_VAL)&&rval<(10*tpad_default_val))

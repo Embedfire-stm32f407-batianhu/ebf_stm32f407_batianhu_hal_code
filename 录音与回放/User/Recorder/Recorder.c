@@ -26,12 +26,12 @@ extern DMA_HandleTypeDef hdma_spi2_rx;
 
 
 /* 录音文件存放路径 */
-#define RECORDERDIR	"recorder"
+#define RECORDERDIR	"0:/recorder"
 /* 音频格式切换列表(可以自定义) */
 #define FMT_COUNT	6		/* 音频格式数组元素个数 */
 
 /* 录音文件路径全称：初始化为rec001.wav */
-static char recfilename[25]={"recorder\rec001.wav"};   
+static char recfilename[25]={"0:/recorder/rec001.wav"};   
 static REC_TYPE Recorder;          	/* 录音设备 */
 static WavHead rec_wav;            	/* WAV设备  */
 volatile uint8_t Isread=0;    		/* DMA传输完成标志 */
@@ -60,22 +60,16 @@ static void StartPlay(const char *filename);
 static void StartRecord(const char *filename);
 
 const uint16_t recplaybuf[4]={0X0000,0X0000};//2个16位数据,用于录音时I2S Master发送.循环发送0.
-/**
-  * @brief   WAV格式音频播放主程序
-	* @note   
-  * @param  无
-  * @retval 无
-  */
 void RecorderDemo(void)
 {
-    uint8_t i;
+	uint8_t i;
 	uint8_t ucRefresh;	/* 通过串口打印相关信息标志 */
 	DIR dir;
 	
 	Recorder.ucStatus=STA_IDLE;    /* 开始设置为空闲状态  */
 	Recorder.ucInput=0;            /* 缺省MIC输入  */
 	Recorder.ucFmtIdx=3;           /* 缺省飞利浦I2S标准，16bit数据长度，44K采样率  */
-	Recorder.ucVolume=55;          /* 缺省耳机音量  */
+	Recorder.ucVolume=35;          /* 缺省耳机音量  */
 	if(Recorder.ucInput==0) //MIC 
 	{
 		Recorder.ucGain=50;          /* 缺省MIC增益  */
@@ -118,11 +112,12 @@ void RecorderDemo(void)
 	I2S_Stop();
 	I2S_GPIO_Config();
 	I2Sx_Mode_Config(g_FmtList[Recorder.ucFmtIdx][0],g_FmtList[Recorder.ucFmtIdx][1],g_FmtList[Recorder.ucFmtIdx][2]);
-	
 	I2Sxext_Mode_Config(g_FmtList[Recorder.ucFmtIdx][0],g_FmtList[Recorder.ucFmtIdx][1],g_FmtList[Recorder.ucFmtIdx][2]);
 	
+//	I2S_DMA_TX_Callback=MusicPlayer_I2S_DMA_TX_Callback;
 	I2S_Play_Stop();
 	
+//	I2S_DMA_RX_Callback=Recorder_I2S_DMA_RX_Callback;
 	I2Sxext_Recorde_Stop();
 	
 	ucRefresh = 1;
@@ -145,7 +140,7 @@ void RecorderDemo(void)
 				/* 寻找合适文件名 */
 				for(i=1;i<0xff;++i)
 				{
-					sprintf(recfilename,"recorder/rec%03d.wav",i);
+					sprintf(recfilename,"0:/recorder/rec%03d.wav",i);
 					result=f_open(&file,(const TCHAR *)recfilename,FA_READ);
 					if(result==FR_NO_FILE)break;					
 				}
@@ -210,7 +205,7 @@ void RecorderDemo(void)
 						else
 							result = f_read(&file,buffer1,RECBUFFER_SIZE*2,&bw);
 						/* 播放完成或读取出错停止工作 */
-						if((result!=FR_OK)||(file.fptr==file.fsize))
+	         if((result!=FR_OK)||(file.fptr==file.fsize))
 						{
 							printf("播放完或者读取出错退出...\r\n");
 							I2S_Play_Stop();
@@ -277,7 +272,6 @@ static void StartPlay(const char *filename)
 static void StartRecord(const char *filename)
 {
 	printf("当前录音文件 -> %s\n",filename);
-	result = f_close (&file);
 	result=f_open(&file,filename,FA_CREATE_ALWAYS|FA_WRITE);
 	if(result!=FR_OK)
 	{
@@ -294,7 +288,7 @@ static void StartRecord(const char *filename)
 	Delay_ms(10);		/* 延迟一段时间，等待I2S中断结束 */
 	I2S_Stop();			/* 停止I2S录音和放音 */
 	wm8978_Reset();		/* 复位WM8978到复位状态 */
-	wm8978_CtrlGPIO1(0);
+//	wm8978_CtrlGPIO1(0);
 	Recorder.ucStatus = STA_RECORDING;		/* 录音状态 */
 		
 	/* 调节放音音量，左右相同音量 */
@@ -321,6 +315,8 @@ static void StartRecord(const char *filename)
 	I2Sxext_Mode_Config(g_FmtList[Recorder.ucFmtIdx][0],g_FmtList[Recorder.ucFmtIdx][1],g_FmtList[Recorder.ucFmtIdx][2]);
 
 	I2Sxext_RX_DMA_Init(buffer0,buffer1,RECBUFFER_SIZE);
+  
+  HAL_DMAEx_MultiBufferStart_IT(&hdma_spi2_rx,(uint32_t)&(WM8978_I2Sx_SPI->DR),(uint32_t)buffer0,(uint32_t)buffer1,g_FmtList[Recorder.ucFmtIdx][2]);
   	
 	I2Sxext_Recorde_Start();
 }
