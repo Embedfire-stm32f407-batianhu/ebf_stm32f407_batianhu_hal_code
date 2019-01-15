@@ -806,14 +806,14 @@
               <FilePath>..\User\FatFs\ff_gen_drv.c</FilePath>
             </File>
             <File>
-              <FileName>sd_diskio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\FatFs\drivers\sd_diskio.c</FilePath>
-            </File>
-            <File>
               <FileName>cc936.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\FatFs\option\cc936.c</FilePath>
+            </File>
+            <File>
+              <FileName>sd_diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\FatFs\drivers\sd_diskio.c</FilePath>
             </File>
           </Files>
         </Group>

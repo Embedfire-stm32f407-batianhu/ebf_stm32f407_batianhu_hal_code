@@ -60,8 +60,6 @@ int main ( void )
 	{
 		LCD_Test();
 	}
-	
-	
 }
 
 
