@@ -147,7 +147,15 @@ static uint8_t WM8978_I2C_WriteRegister(uint8_t RegisterAddr, uint16_t RegisterV
   
 	tmp  = (RegisterValue&0xff) << 8;
 	tmp |= ((RegisterAddr << 1) & 0xFE) | ((RegisterValue >> 8) & 0x1);
-  HAL_I2C_Master_Transmit(&I2C_InitStructure,WM8978_SLAVE_ADDRESS,(uint8_t *)&tmp,2,WM8978_I2C_FLAG_TIMEOUT); 
+  if(HAL_I2C_Master_Transmit(&I2C_InitStructure,WM8978_SLAVE_ADDRESS,(uint8_t *)&tmp,2,WM8978_I2C_FLAG_TIMEOUT)==HAL_OK)
+  {
+		return 1; 
+	}
+	else 		
+	{
+  return 0;  
+  }
+}    
 //  I2Cx_WriteMultiple(&I2C_InitStructure,WM8978_SLAVE_ADDRESS,RegisterAddr, I2C_MEMADD_SIZE_16BIT,(uint8_t*)&RegisterValue, 2);  
 //  /* Start the config sequence */
 //  I2C_GenerateSTART(WM8978_I2C, ENABLE);
@@ -195,8 +203,8 @@ static uint8_t WM8978_I2C_WriteRegister(uint8_t RegisterAddr, uint16_t RegisterV
 //  I2C_GenerateSTOP(WM8978_I2C, ENABLE);
 //I2Cx_WriteMultiple(&I2C_InitStructure, WM8978_SLAVE_ADDRESS, (uint16_t)RegisterAddr, I2C_MEMADD_SIZE_8BIT,(uint8_t*)&RegisterValue, 1);
   /* Return the verifying value: 0 (Passed) or 1 (Failed) */
-  return 1;  
-}
+//  return 1;  
+//}
 
 /**
 	* @brief  从cash中读回读回wm8978寄存器
@@ -443,7 +451,6 @@ void wm8978_PowerDown(void)
 	wm8978_Reset();			/* 硬件复位WM8978所有寄存器到缺省状态 */
 }
 
-
 /**
 	* @brief  配置WM8978的音频接口(I2S)
 	* @param  _usStandard : 接口标准，I2S_Standard_Phillips, I2S_Standard_MSB 或 I2S_Standard_LSB
@@ -466,15 +473,15 @@ void wm8978_CfgAudioIF(uint16_t _usStandard, uint8_t _ucWordLen)
 		B0		MONO	= 0，0表示立体声，1表示单声道，仅左声道有效
 	*/
 	usReg = 0;
-	if (_usStandard ==  ((uint16_t)0x0000))	/* I2S飞利浦标准 */
+	if (_usStandard == (uint16_t)0x0000)	/* I2S飞利浦标准 */
 	{
 		usReg |= (2 << 3);
 	}
-	else if (_usStandard == ((uint16_t)0x0010))	/* MSB对齐标准(左对齐) */
+	else if (_usStandard == (uint16_t)0x0010)	/* MSB对齐标准(左对齐) */
 	{
 		usReg |= (1 << 3);
 	}
-	else if (_usStandard == ((uint16_t)0x0020))	/* LSB对齐标准(右对齐) */
+	else if (_usStandard == (uint16_t)0x0020)	/* LSB对齐标准(右对齐) */
 	{
 		usReg |= (0 << 3);
 	}
@@ -496,6 +503,7 @@ void wm8978_CfgAudioIF(uint16_t _usStandard, uint8_t _ucWordLen)
 		usReg |= (0 << 5);		/* 16bit */
 	}
 	wm8978_WriteReg(4, usReg);
+
 
 	/*
 		R6，时钟产生控制寄存器
@@ -960,6 +968,7 @@ uint8_t wm8978_Reset(void)
 	}
 	return res;
 }
+
 /**
 	*******************************************************************************************************
 	*	                     下面的代码是和STM32 I2S硬件相关的
@@ -1324,6 +1333,7 @@ void I2S_Play_Stop(void)
 	*/
 void I2Sxext_Mode_Config(const uint16_t _usStandard, const uint16_t _usWordLen,const uint32_t _usAudioFreq)
 {
+ 
 	/* 打开 I2S2 APB1 时钟 */
 	WM8978_CLK_ENABLE();
 	
@@ -1367,7 +1377,7 @@ void I2Sxext_RX_DMA_Init(const uint16_t *buffer0,const uint16_t *buffer1,const u
 	DMA_HandleTypeDef  DMA_RXInitStructure;
 	
 	I2Sx_DMA_CLK_ENABLE();//DMA1时钟使能 
-	
+	__HAL_DMA_CLEAR_FLAG(&DMA_RXInitStructure,DMA_FLAG_FEIF3_7 | DMA_FLAG_DMEIF3_7 | DMA_FLAG_TEIF3_7 | DMA_FLAG_HTIF3_7 | DMA_FLAG_TCIF3_7);
 	/* 配置 DMA Stream */
 	hdma_spi2_rx.Instance =I2Sxext_RX_DMA_STREAM;
 	hdma_spi2_rx.Init.Channel = I2Sxext_RX_DMA_CHANNEL;  //通道3 SPIx_RX通道 
@@ -1382,24 +1392,30 @@ void I2Sxext_RX_DMA_Init(const uint16_t *buffer0,const uint16_t *buffer1,const u
 	hdma_spi2_rx.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
 	hdma_spi2_rx.Init.MemBurst = DMA_MBURST_SINGLE;//外设突发单次传输
 	hdma_spi2_rx.Init.PeriphBurst = DMA_PBURST_SINGLE;//存储器突发单次传输
-//	__HAL_DMA_CLEAR_FLAG(&DMA_RXInitStructure,DMA_FLAG_FEIF3_7 | DMA_FLAG_DMEIF3_7 | DMA_FLAG_TEIF3_7 | DMA_FLAG_HTIF3_7 | DMA_FLAG_TCIF3_7);
+ 
 	HAL_DMA_Init(&hdma_spi2_rx);//初始化DMA Stream
 	
   __HAL_LINKDMA(&I2Sext_InitStructure,hdmarx,hdma_spi2_rx);
-    	
-	hdma_spi2_rx.XferCpltCallback= I2Sxext_DMAConvCplt;
-	hdma_spi2_rx.XferM1CpltCallback = I2Sxext_DMAConvCplt;
-  hdma_spi2_rx.XferErrorCallback = I2Sxext_DMAError;
-//  
-//	//执行回调函数,读取数据等操作在这里面处理	
-//	HAL_DMAEx_MultiBufferStart_IT(&hdma_spi2_rx,(uint32_t)&(WM8978_I2Sx_SPI->DR),(uint32_t)buffer0,(uint32_t)buffer1,num);
-	
-	/* NVIC configuration for I2S interrupts */
-	HAL_NVIC_SetPriority(SPI2_IRQn, 0, 3);
-	HAL_NVIC_EnableIRQ(SPI2_IRQn);
+  
+//  HAL_NVIC_SetPriority(SPI2_IRQn, 0, 3);
+//	HAL_NVIC_EnableIRQ(SPI2_IRQn);
 
 	HAL_NVIC_SetPriority(I2Sxext_RX_DMA_STREAM_IRQn,0,0);
 	HAL_NVIC_EnableIRQ(I2Sxext_RX_DMA_STREAM_IRQn );
+  
+  //	//执行回调函数,读取数据等操作在这里面处理  	
+	hdma_spi2_rx.XferCpltCallback= I2Sxext_DMAConvCplt;
+	hdma_spi2_rx.XferM1CpltCallback = I2Sxext_DMAConvCplt;
+  hdma_spi2_rx.XferErrorCallback = I2Sxext_DMAError;  
+	
+	HAL_DMAEx_MultiBufferStart_IT(&hdma_spi2_rx,(uint32_t)&(WM8978_I2Sx_SPI->DR),(uint32_t)buffer0,(uint32_t)buffer1,num);
+	
+	/* NVIC configuration for I2S interrupts */
+//	HAL_NVIC_SetPriority(SPI2_IRQn, 0, 3);
+//	HAL_NVIC_EnableIRQ(SPI2_IRQn);
+
+//	HAL_NVIC_SetPriority(I2Sxext_RX_DMA_STREAM_IRQn,0,0);
+//	HAL_NVIC_EnableIRQ(I2Sxext_RX_DMA_STREAM_IRQn );
 }
 
 /**
@@ -1421,10 +1437,7 @@ void I2Sxext_RX_DMA_STREAM_IRQFUN(void)
 	*/
 void I2Sxext_Recorde_Start(void)
 {  
-//  WM8978_I2Sx_SPI->DR=100;  
-	//开启DMA RX传输,开始录音
 	I2Sext_InitStructure.Instance->CR2 |= SPI_CR2_RXDMAEN;
-//  I2Sext_InitStructure.Instance->DR = 100;
 }
 
 /**

@@ -73,7 +73,7 @@ static void WIFI_PDN_INIT(void)
   */
 int main(void)
 {
-	/* 配置系统时钟为216 MHz */
+	/* 配置系统时钟为168 MHz */
   SystemClock_Config();
 
 	/*禁用WiFi模块*/
@@ -115,7 +115,6 @@ int main(void)
 	{		
 	}
 }
-
 
 /**
   * @brief  System Clock Configuration
