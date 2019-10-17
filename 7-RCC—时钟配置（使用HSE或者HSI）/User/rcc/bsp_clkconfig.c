@@ -14,7 +14,6 @@
  * 5、把PLLCK切换为系统时钟SYSCLK
  * 6、读取时钟切换状态位，确保PLLCLK被选为系统时钟
  */
-
 /*
  * m: VCO输入时钟 分频因子，取值2~63
  * n: VCO输出时钟 倍频因子，取值50~432
@@ -33,9 +32,10 @@ void HSE_SetSysClock(uint32_t m, uint32_t n, uint32_t p, uint32_t q)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
   
-  /* The voltage scaling allows optimizing the power consumption when the device is 
-     clocked below the maximum system frequency, to update the voltage scaling value 
-     regarding system frequency refer to product datasheet.  */
+  /* The voltage scaling allows optimizing the power consumption when 
+	the device is clocked below the maximum system frequency, to update 
+	the voltage scaling value regarding system frequency refer to product
+	datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
   
   /* Enable HSE Oscillator and activate PLL with HSE as source */
@@ -52,9 +52,10 @@ void HSE_SetSysClock(uint32_t m, uint32_t n, uint32_t p, uint32_t q)
     while(1) {};
   }
   
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
-     clocks dividers */
-  RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
+  /* Select PLL as system clock source and configure the HCLK,
+	PCLK1 and PCLK2	clocks dividers */
+  RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK |
+                                	RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
@@ -106,9 +107,10 @@ void HSI_SetSysClock(uint32_t m, uint32_t n, uint32_t p, uint32_t q)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
   
-  /* The voltage scaling allows optimizing the power consumption when the device is 
-     clocked below the maximum system frequency, to update the voltage scaling value 
-     regarding system frequency refer to product datasheet.  */
+  /* The voltage scaling allows optimizing the power consumption
+	when the device is clocked below the maximum system frequency,
+	to update the voltage scaling value  regarding system 
+	frequency refer toproduct datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
   
   /* Enable HSE Oscillator and activate PLL with HSE as source */
@@ -125,8 +127,8 @@ void HSI_SetSysClock(uint32_t m, uint32_t n, uint32_t p, uint32_t q)
     while(1) {};
   }
   
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
-     clocks dividers */
+  /* Select PLL as system clock source and configure the HCLK,
+	PCLK1 and PCLK2 clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;

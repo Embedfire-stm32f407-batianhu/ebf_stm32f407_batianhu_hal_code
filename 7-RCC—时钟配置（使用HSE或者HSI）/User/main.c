@@ -37,11 +37,11 @@ int main(void)
     // 如果用户想修改系统时钟，可自行编写程序修改	
     // 重新设置系统时钟，这时候可以选择使用HSE还是HSI
   
-    //系统时钟设置为216M，最高是250M
+    //系统时钟设置为168M，最高是216M
     HSE_SetSysClock(25, 336, 2, 7);
         
-    // 使用HSI，配置系统时钟为216M
-    //HSI_SetSysClock(16, 336, 2, 7);
+    // 使用HSI，配置系统时钟为168M
+    //HSI_SetSysClock(25, 336, 2, 7);
         
     // LED 端口初始化 
     LED_GPIO_Config();
@@ -55,9 +55,9 @@ int main(void)
     while (1)
     {
         LED2( ON );			 // 亮 
-        Delay(0x0FFFFF);
+        Delay(0x5FFFFF);
         LED2( OFF );		 // 灭
-        Delay(0x0FFFFF);
+        Delay(0x5FFFFF);
     }
 }
 
