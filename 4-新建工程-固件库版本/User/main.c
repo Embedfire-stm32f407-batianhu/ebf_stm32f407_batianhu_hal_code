@@ -29,7 +29,7 @@ static void SystemClock_Config(void);
   */
 int main(void)
 {
-    /* 系统时钟初始化成216 MHz */
+    /* 系统时钟初始化成168 MHz */
     SystemClock_Config();
     /* 在这里添加你的代码^_^. */
     while(1);  
@@ -38,14 +38,14 @@ int main(void)
 /**
   * @brief  系统时钟配置 
   *            System Clock source            = PLL (HSE)
-  *            SYSCLK(Hz)                     = 180000000
-  *            HCLK(Hz)                       = 180000000
+  *            SYSCLK(Hz)                     = 168000000
+  *            HCLK(Hz)                       = 168000000
   *            AHB Prescaler                  = 1
   *            APB1 Prescaler                 = 4
   *            APB2 Prescaler                 = 2
-  *            HSE Frequency(Hz)              = 12000000
+  *            HSE Frequency(Hz)              = 25000000
   *            PLL_M                          = 25
-  *            PLL_N                          = 360
+  *            PLL_N                          = 336
   *            PLL_P                          = 2
   *            PLL_Q                          = 4
   *            VDD(V)                         = 3.3
@@ -68,7 +68,7 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 25;
-  RCC_OscInitStruct.PLL.PLLN = 360;
+  RCC_OscInitStruct.PLL.PLLN = 336;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 4;
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
@@ -78,18 +78,12 @@ static void SystemClock_Config(void)
     while(1) {}
   }
 
-  /* 激活 OverDrive 模式以达到180M频率 */
-  ret =HAL_PWREx_EnableOverDrive();
-   if( ret != HAL_OK)
-  {
-    while(1) {}
-  }
  
   /* 选择PLLCLK作为SYSCLK，并配置 HCLK, PCLK1 and PCLK2 的时钟分频因子 
-	 * SYSCLK = PLLCLK     = 216M
-	 * HCLK   = SYSCLK / 1 = 216M
-	 * PCLK2  = SYSCLK / 2 = 108M
-	 * PCLK1  = SYSCLK / 4 = 54M
+	 * SYSCLK = PLLCLK     = 168M
+	 * HCLK   = SYSCLK / 1 = 168M
+	 * PCLK2  = SYSCLK / 2 = 84M
+	 * PCLK1  = SYSCLK / 4 = 42M
 	 */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;

@@ -10,20 +10,20 @@
       <TargetName>多彩流水灯</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STM32F429IGTx</Device>
+          <Device>STM32F407ZGTx</Device>
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32F4xx_DFP.2.12.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
-          <Cpu>IRAM(0x20000000,0x00030000) IRAM2(0x10000000,0x00010000) IROM(0x08000000,0x00100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
+          <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x10000000,0x00010000) IROM(0x08000000,0x00100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F4xx_1024 -FS08000000 -FL0100000 -FP0($$Device:STM32F429IGTx$CMSIS\Flash\STM32F4xx_1024.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F4xx_1024 -FS08000000 -FL0100000 -FP0($$Device:STM32F407ZGTx$CMSIS\Flash\STM32F4xx_1024.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:STM32F429IGTx$Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h</RegisterFile>
+          <RegisterFile>$$Device:STM32F407ZGTx$Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -33,7 +33,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:STM32F429IGTx$CMSIS\SVD\STM32F429x.svd</SFDFile>
+          <SFDFile>$$Device:STM32F407ZGTx$CMSIS\SVD\STM32F40x.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -54,7 +54,7 @@
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
-          <BrowseInformation>1</BrowseInformation>
+          <BrowseInformation>0</BrowseInformation>
           <ListingPath>..\Listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -245,7 +245,7 @@
               <IRAM>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x30000</Size>
+                <Size>0x20000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
@@ -300,7 +300,7 @@
               <OCR_RVCT9>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x30000</Size>
+                <Size>0x20000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
@@ -336,7 +336,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM32F429I_DISCO</Define>
+              <Define>USE_HAL_DRIVER,STM32F407xx,USE_STM32F407I_DISCO</Define>
               <Undefine></Undefine>
               <IncludePath>..\Libraries\CMSIS\Include;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\STM32F4xx_HAL_Driver\Inc;..\User;..\User\led</IncludePath>
             </VariousControls>
@@ -402,11 +402,6 @@
         <Group>
           <GroupName>STM32F4xx_HAL_Driver</GroupName>
           <Files>
-            <File>
-              <FileName>stm32f4xx_hal_can.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\Legacy\stm32f4xx_hal_can.c</FilePath>
-            </File>
             <File>
               <FileName>stm32f4xx_hal.c</FileName>
               <FileType>1</FileType>
@@ -726,57 +721,6 @@
               <FileName>stm32f4xx_ll_fmc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fmc.c</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>1</IncludeInBuild>
-                  <AlwaysBuild>1</AlwaysBuild>
-                  <GenerateAssemblyFile>1</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                </CommonProperty>
-                <FileArmAds>
-                  <Cads>
-                    <interw>2</interw>
-                    <Optim>0</Optim>
-                    <oTime>2</oTime>
-                    <SplitLS>2</SplitLS>
-                    <OneElfS>2</OneElfS>
-                    <Strict>2</Strict>
-                    <EnumInt>2</EnumInt>
-                    <PlainCh>2</PlainCh>
-                    <Ropi>2</Ropi>
-                    <Rwpi>2</Rwpi>
-                    <wLevel>0</wLevel>
-                    <uThumb>2</uThumb>
-                    <uSurpInc>2</uSurpInc>
-                    <uC99>2</uC99>
-                    <uGnu>2</uGnu>
-                    <useXO>2</useXO>
-                    <v6Lang>0</v6Lang>
-                    <v6LangP>0</v6LangP>
-                    <vShortEn>2</vShortEn>
-                    <vShortWch>2</vShortWch>
-                    <v6Lto>2</v6Lto>
-                    <v6WtE>2</v6WtE>
-                    <v6Rtti>2</v6Rtti>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
             </File>
             <File>
               <FileName>stm32f4xx_ll_sdmmc.c</FileName>
@@ -787,6 +731,116 @@
               <FileName>stm32f4xx_ll_usb.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usb.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_msp_template.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_msp_template.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_smbus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_smbus.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_crc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_dac.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_dac.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_dma2d.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_dma2d.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_fsmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_lptim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_lptim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_pwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_rng.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_rng.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_ll_utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_utils.c</FilePath>
             </File>
           </Files>
         </Group>
