@@ -19,9 +19,7 @@
 #include "main.h"
 #include "stm32f4xx.h"
 #include "./led/bsp_led.h"
-
 static void SystemClock_Config(void);
-
 /**
   * @brief  主函数
   * @param  无
@@ -29,7 +27,7 @@ static void SystemClock_Config(void);
   */
 int main(void)
 {
-    /* 系统时钟初始化成216 MHz */
+    /* 系统时钟初始化成168MHz */
     SystemClock_Config();
 
     /* LED 端口初始化 */
