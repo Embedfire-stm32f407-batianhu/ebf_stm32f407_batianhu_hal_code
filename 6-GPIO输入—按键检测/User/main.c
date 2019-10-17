@@ -22,7 +22,6 @@
 #include ".\key\bsp_key.h" 
 
 static void SystemClock_Config(void);
-
 /**
   * @brief  主函数
   * @param  无
@@ -30,15 +29,12 @@ static void SystemClock_Config(void);
   */
 int main(void)
 {
-  /* 系统时钟初始化成216 MHz */
+  /* 系统时钟初始化成168 MHz */
   SystemClock_Config();
 	/* LED 端口初始化 */
 	LED_GPIO_Config();	 
-  
     /*初始化按键*/
-    Key_GPIO_Config();
-	
- 
+  Key_GPIO_Config();
 	/* 轮询按键状态，若按键按下则反转LED */ 
 	while(1)                            
 	{	   
@@ -47,7 +43,6 @@ int main(void)
 			/*LED1反转*/
 			LED1_TOGGLE;
 		}   
-    
     if( Key_Scan(KEY2_GPIO_PORT,KEY2_PIN) == KEY_ON  )
 		{
 			/*LED2反转*/
