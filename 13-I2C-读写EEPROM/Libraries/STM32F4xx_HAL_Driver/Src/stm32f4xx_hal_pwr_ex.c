@@ -256,7 +256,7 @@ HAL_StatusTypeDef HAL_PWREx_ControlVoltageScaling(uint32_t VoltageScaling)
   return HAL_OK;
 }
 
-#elif defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) || \
+#elif defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || \
       defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F410Tx) || defined(STM32F410Cx) || \
       defined(STM32F410Rx) || defined(STM32F411xE) || defined(STM32F446xx) || defined(STM32F469xx) || \
       defined(STM32F479xx) || defined(STM32F412Zx) || defined(STM32F412Vx) || defined(STM32F412Rx) || \
@@ -399,7 +399,7 @@ void HAL_PWREx_DisableLowRegulatorLowVoltage(void)
 #endif /* STM32F401xC || STM32F401xE || STM32F410xx || STM32F411xE || STM32F412Zx || STM32F412Rx || STM32F412Vx || STM32F412Cx ||
           STM32F413xx || STM32F423xx */
 
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) ||\
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) ||\
     defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)
 /**
   * @brief  Activates the Over-Drive mode.
@@ -583,7 +583,7 @@ HAL_StatusTypeDef HAL_PWREx_EnterUnderDriveSTOPMode(uint32_t Regulator, uint8_t 
   return HAL_OK;  
 }
 
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
 /**
   * @}
   */

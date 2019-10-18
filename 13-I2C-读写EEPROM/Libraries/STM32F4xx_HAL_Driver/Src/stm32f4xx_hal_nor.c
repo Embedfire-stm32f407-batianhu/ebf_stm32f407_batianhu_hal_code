@@ -116,7 +116,7 @@
   */
 #ifdef HAL_NOR_MODULE_ENABLED
 #if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) ||\
-    defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) ||\
+    defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) ||\
     defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx) || defined(STM32F412Zx) ||\
     defined(STM32F412Vx) || defined(STM32F412Rx) || defined(STM32F413xx) || defined(STM32F423xx)
 /* Private typedef -----------------------------------------------------------*/
@@ -1178,7 +1178,7 @@ HAL_NOR_StatusTypeDef HAL_NOR_GetStatus(NOR_HandleTypeDef *hnor, uint32_t Addres
   * @}
   */
 #endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx || STM32F427xx ||\
-          STM32F437xx || STM32F407xx || STM32F439xx || STM32F446xx || STM32F469xx ||\
+          STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx ||\
           STM32F479xx || STM32F412Zx || STM32F412Vx || STM32F412Rx || STM32F413xx ||\
           STM32F423xx */
 #endif /* HAL_NOR_MODULE_ENABLED */

@@ -69,7 +69,7 @@
 
 #if defined (HAL_SRAM_MODULE_ENABLED) || defined(HAL_NOR_MODULE_ENABLED) || defined(HAL_NAND_MODULE_ENABLED) || defined(HAL_PCCARD_MODULE_ENABLED) || defined(HAL_SDRAM_MODULE_ENABLED)
 
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) || defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -142,9 +142,9 @@ HAL_StatusTypeDef  FMC_NORSRAM_Init(FMC_NORSRAM_TypeDef *Device, FMC_NORSRAM_Ini
   assert_param(IS_FMC_NORSRAM_MEMORY_WIDTH(Init->MemoryDataWidth));
   assert_param(IS_FMC_BURSTMODE(Init->BurstAccessMode));
   assert_param(IS_FMC_WAIT_POLARITY(Init->WaitSignalPolarity));
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx)
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx)
   assert_param(IS_FMC_WRAP_MODE(Init->WrapMode));
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx */
   assert_param(IS_FMC_WAIT_SIGNAL_ACTIVE(Init->WaitSignalActive));
   assert_param(IS_FMC_WRITE_OPERATION(Init->WriteOperation));
   assert_param(IS_FMC_WAITE_SIGNAL(Init->WaitSignal));
@@ -160,7 +160,7 @@ HAL_StatusTypeDef  FMC_NORSRAM_Init(FMC_NORSRAM_TypeDef *Device, FMC_NORSRAM_Ini
   /* Get the BTCR register value */
   tmpr = Device->BTCR[Init->NSBank];
 
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx)
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx)
   /* Clear MBKEN, MUXEN, MTYP, MWID, FACCEN, BURSTEN, WAITPOL, WRAPMOD, WAITCFG, WREN,
            WAITEN, EXTMOD, ASYNCWAIT, CPSIZE, CBURSTRW and CCLKEN bits */
   tmpr &= ((uint32_t)~(FMC_BCR1_MBKEN     | FMC_BCR1_MUXEN    | FMC_BCR1_MTYP     | \
@@ -210,7 +210,7 @@ HAL_StatusTypeDef  FMC_NORSRAM_Init(FMC_NORSRAM_TypeDef *Device, FMC_NORSRAM_Ini
                     Init->ContinuousClock      |\
                     Init->PageSize             |\
                     Init->WriteFifo);
-#endif /*  defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) */
+#endif /*  defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) */
                     
   if(Init->MemoryType == FMC_MEMORY_TYPE_NOR)
   {
@@ -727,7 +727,7 @@ HAL_StatusTypeDef FMC_NAND_GetECC(FMC_NAND_TypeDef *Device, uint32_t *ECCval, ui
   * @}
   */
 
-#else /* defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) */
+#else /* defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) */
 /** @defgroup HAL_FMC_NAND_Group1 Initialization/de-initialization functions 
  *  @brief    Initialization and Configuration functions 
  *
@@ -1076,7 +1076,7 @@ HAL_StatusTypeDef FMC_NAND_GetECC(FMC_NAND_TypeDef *Device, uint32_t *ECCval, ui
   * @}
   */
 
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx)
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx)
 /** @addtogroup FMC_LL_PCCARD
   * @brief    PCCARD Controller functions 
   *
@@ -1284,7 +1284,7 @@ HAL_StatusTypeDef FMC_PCCARD_DeInit(FMC_PCCARD_TypeDef *Device)
 /**
   * @}
   */
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx */
 
 
 /** @addtogroup FMC_LL_SDRAM
@@ -1678,7 +1678,7 @@ uint32_t FMC_SDRAM_GetModeStatus(FMC_SDRAM_TypeDef *Device, uint32_t Bank)
 /**
   * @}
   */
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
 #endif /* HAL_SRAM_MODULE_ENABLED || HAL_NOR_MODULE_ENABLED || HAL_NAND_MODULE_ENABLED || HAL_PCCARD_MODULE_ENABLED || HAL_SDRAM_MODULE_ENABLED */
 
 /**

@@ -107,7 +107,7 @@
 
 #ifdef HAL_PCCARD_MODULE_ENABLED
 #if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) ||\
-    defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx)
+    defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx)
 /** @defgroup PCCARD PCCARD  
   * @brief PCCARD HAL module driver
   * @{
@@ -928,7 +928,7 @@ HAL_PCCARD_StatusTypeDef HAL_PCCARD_ReadStatus(PCCARD_HandleTypeDef *hpccard)
   * @}
   */
 #endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx ||\
-          STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx */
+          STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx */
 #endif /* HAL_PCCARD_MODULE_ENABLED */
 
 /**

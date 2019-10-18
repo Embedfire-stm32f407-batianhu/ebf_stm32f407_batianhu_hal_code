@@ -162,7 +162,7 @@
 
 /**
   * @brief  Initializes the GPIOx peripheral according to the specified parameters in the GPIO_Init.
-  * @param  GPIOx where x can be (A..K) to select the GPIO peripheral for STM32F407X device or
+  * @param  GPIOx where x can be (A..K) to select the GPIO peripheral for STM32F429X device or
   *                      x can be (A..I) to select the GPIO peripheral for STM32F40XX and STM32F427X devices.
   * @param  GPIO_Init pointer to a GPIO_InitTypeDef structure that contains
   *         the configuration information for the specified GPIO peripheral.
@@ -287,7 +287,7 @@ void HAL_GPIO_Init(GPIO_TypeDef  *GPIOx, GPIO_InitTypeDef *GPIO_Init)
 
 /**
   * @brief  De-initializes the GPIOx peripheral registers to their default reset values.
-  * @param  GPIOx where x can be (A..K) to select the GPIO peripheral for STM32F407X device or
+  * @param  GPIOx where x can be (A..K) to select the GPIO peripheral for STM32F429X device or
   *                      x can be (A..I) to select the GPIO peripheral for STM32F40XX and STM32F427X devices.
   * @param  GPIO_Pin specifies the port bit to be written.
   *          This parameter can be one of GPIO_PIN_x where x can be (0..15).
@@ -368,7 +368,7 @@ void HAL_GPIO_DeInit(GPIO_TypeDef  *GPIOx, uint32_t GPIO_Pin)
 
 /**
   * @brief  Reads the specified input port pin.
-  * @param  GPIOx where x can be (A..K) to select the GPIO peripheral for STM32F407X device or
+  * @param  GPIOx where x can be (A..K) to select the GPIO peripheral for STM32F429X device or
   *                      x can be (A..I) to select the GPIO peripheral for STM32F40XX and STM32F427X devices.
   * @param  GPIO_Pin specifies the port bit to read.
   *         This parameter can be GPIO_PIN_x where x can be (0..15).
@@ -399,7 +399,7 @@ GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
   *         accesses. In this way, there is no risk of an IRQ occurring between
   *         the read and the modify access.
   *
-  * @param  GPIOx where x can be (A..K) to select the GPIO peripheral for STM32F407X device or
+  * @param  GPIOx where x can be (A..K) to select the GPIO peripheral for STM32F429X device or
   *                      x can be (A..I) to select the GPIO peripheral for STM32F40XX and STM32F427X devices.
   * @param  GPIO_Pin specifies the port bit to be written.
   *          This parameter can be one of GPIO_PIN_x where x can be (0..15).
@@ -427,7 +427,7 @@ void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState Pin
 
 /**
   * @brief  Toggles the specified GPIO pins.
-  * @param  GPIOx Where x can be (A..K) to select the GPIO peripheral for STM32F407X device or
+  * @param  GPIOx Where x can be (A..K) to select the GPIO peripheral for STM32F429X device or
   *                      x can be (A..I) to select the GPIO peripheral for STM32F40XX and STM32F427X devices.
   * @param  GPIO_Pin Specifies the pins to be toggled.
   * @retval None

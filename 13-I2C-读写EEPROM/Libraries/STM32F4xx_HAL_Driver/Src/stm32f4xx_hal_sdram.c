@@ -123,7 +123,7 @@
   * @{
   */
 #ifdef HAL_SDRAM_MODULE_ENABLED
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) ||\
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) ||\
     defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)
 
 /* Private typedef -----------------------------------------------------------*/
@@ -1089,7 +1089,7 @@ HAL_SDRAM_StateTypeDef HAL_SDRAM_GetState(SDRAM_HandleTypeDef *hsdram)
 /**
   * @}
   */
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
 #endif /* HAL_SDRAM_MODULE_ENABLED */
 /**
   * @}

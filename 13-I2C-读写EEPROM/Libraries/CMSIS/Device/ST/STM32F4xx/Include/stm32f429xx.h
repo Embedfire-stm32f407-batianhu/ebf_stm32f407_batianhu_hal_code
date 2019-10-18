@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    stm32f429xx.h
   * @author  MCD Application Team
-  * @brief   CMSIS STM32F407xx Device Peripheral Access Layer Header File.
+  * @brief   CMSIS STM32F429xx Device Peripheral Access Layer Header File.
   *
   *          This file contains:
   *           - Data structures and the address mapping for all peripherals
@@ -47,8 +47,8 @@
   * @{
   */
     
-#ifndef __STM32F407xx_H
-#define __STM32F407xx_H
+#ifndef __STM32F429xx_H
+#define __STM32F429xx_H
 
 #ifdef __cplusplus
  extern "C" {
@@ -17184,7 +17184,7 @@ typedef struct
 }
 #endif /* __cplusplus */
 
-#endif /* __STM32F407xx_H */
+#endif /* __STM32F429xx_H */
 
 
 

@@ -50,7 +50,7 @@
 
 #ifdef HAL_SAI_MODULE_ENABLED
 
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) || \
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || \
     defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx) || defined(STM32F413xx) || \
     defined(STM32F423xx)
 
@@ -131,7 +131,7 @@ void SAI_BlockSynchroConfig(SAI_HandleTypeDef *hsai)
     SAI2->GCR = tmpregisterGCR;
   }
 #endif /* STM32F446xx */
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) || \
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || \
     defined(STM32F469xx) || defined(STM32F479xx) || defined(STM32F413xx) || defined(STM32F423xx)
   /* This setting must be done with both audio block (A & B) disabled         */
   switch(hsai->Init.SynchroExt)
@@ -150,7 +150,7 @@ void SAI_BlockSynchroConfig(SAI_HandleTypeDef *hsai)
     break;
   }
   SAI1->GCR = tmpregisterGCR;
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F469xx || STM32F479xx || STM32F413xx || STM32F423xx */ 
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F469xx || STM32F479xx || STM32F413xx || STM32F423xx */ 
 }
   /**
   * @brief  Get SAI Input Clock based on SAI source clock selection
@@ -173,7 +173,7 @@ uint32_t SAI_GetInputClock(SAI_HandleTypeDef *hsai)
     saiclocksource = HAL_RCCEx_GetPeriphCLKFreq(RCC_PERIPHCLK_SAI2); 
   }
 #endif /* STM32F446xx */
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) || \
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || \
   defined(STM32F469xx) || defined(STM32F479xx) || defined(STM32F413xx) || defined(STM32F423xx)
   uint32_t vcoinput = 0U, tmpreg = 0U;
   
@@ -285,7 +285,7 @@ uint32_t SAI_GetInputClock(SAI_HandleTypeDef *hsai)
     saiclocksource = EXTERNAL_CLOCK_VALUE;
   }
 #endif /* STM32F413xx || STM32F423xx */  
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F469xx || STM32F479xx || STM32F413xx || STM32F423xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F469xx || STM32F479xx || STM32F413xx || STM32F423xx */
        /* the return result is the value of SAI clock */
   return saiclocksource;
 }
@@ -298,7 +298,7 @@ uint32_t SAI_GetInputClock(SAI_HandleTypeDef *hsai)
   * @}
   */
 
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx  || STM32F446xx || STM32F469xx || STM32F479xx || STM32F413xx || STM32F423xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx  || STM32F446xx || STM32F469xx || STM32F479xx || STM32F413xx || STM32F423xx */
 #endif /* HAL_SAI_MODULE_ENABLED */
 /**
   * @}

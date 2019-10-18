@@ -294,10 +294,10 @@ typedef  void (*pI2S_CallbackTypeDef)(I2S_HandleTypeDef *hi2s); /*!< pointer to 
 /** @defgroup I2S_Clock_Source I2S Clock Source Definition
   * @{
   */
-#if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) ||     defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) ||     defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F411xE) || defined(STM32F469xx) ||     defined(STM32F479xx)
+#if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) ||     defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) ||     defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F411xE) || defined(STM32F469xx) ||     defined(STM32F479xx)
 #define I2S_CLOCK_PLL                    (0x00000000U)
 #define I2S_CLOCK_EXTERNAL               (0x00000001U)
-#endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx || STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx ||
+#endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx || STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx ||
           STM32F401xC || STM32F401xE || STM32F411xE || STM32F469xx || STM32F479xx */
 
 #if defined(STM32F446xx) || defined(STM32F412Zx) || defined(STM32F412Vx) || defined(STM32F412Rx) || defined(STM32F412Cx) ||    defined(STM32F413xx) || defined(STM32F423xx)
@@ -574,10 +574,10 @@ uint32_t HAL_I2S_GetError(I2S_HandleTypeDef *hi2s);
 #define IS_I2S_CPOL(__CPOL__) (((__CPOL__) == I2S_CPOL_LOW) || \
                            ((__CPOL__) == I2S_CPOL_HIGH))
 
-#if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) ||     defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) ||     defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F411xE) || defined(STM32F469xx) ||     defined(STM32F479xx)
+#if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) ||     defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) ||     defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F411xE) || defined(STM32F469xx) ||     defined(STM32F479xx)
 #define IS_I2S_CLOCKSOURCE(CLOCK) (((CLOCK) == I2S_CLOCK_EXTERNAL) ||\
                                    ((CLOCK) == I2S_CLOCK_PLL))
-#endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx || STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx ||
+#endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx || STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx ||
           STM32F401xC || STM32F401xE || STM32F411xE || STM32F469xx || STM32F479xx */
 
 #if defined(STM32F446xx) || defined(STM32F412Zx) || defined(STM32F412Vx)  ||    defined(STM32F412Rx) || defined(STM32F412Cx) || defined (STM32F413xx) ||    defined(STM32F423xx)

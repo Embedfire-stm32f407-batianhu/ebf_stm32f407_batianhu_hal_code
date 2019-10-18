@@ -46,8 +46,8 @@
   * @{
   */
 
-/*------------------------------------------ STM32F407xx/STM32F439xx ---------*/
-#if defined(STM32F407xx) || defined(STM32F439xx)
+/*------------------------------------------ STM32F429xx/STM32F439xx ---------*/
+#if defined(STM32F429xx) || defined(STM32F439xx)
 /** 
   * @brief   AF 0 selection  
   */ 
@@ -162,7 +162,7 @@
   * @brief   AF 15 selection  
   */ 
 #define GPIO_AF15_EVENTOUT      ((uint8_t)0x0F)  /* EVENTOUT Alternate Function mapping */
-#endif /* STM32F407xx || STM32F439xx */
+#endif /* STM32F429xx || STM32F439xx */
 /*----------------------------------------------------------------------------*/
 
 /*---------------------------------- STM32F427xx/STM32F437xx------------------*/
@@ -1275,7 +1275,7 @@
                                                ((__GPIOx__) == (GPIOH))? 7U : 8U)
 #endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx */
 
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) ||\
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) ||\
     defined(STM32F469xx) || defined(STM32F479xx)
 #define GPIO_GET_INDEX(__GPIOx__)    (uint8_t)(((__GPIOx__) == (GPIOA))? 0U :\
                                                ((__GPIOx__) == (GPIOB))? 1U :\
@@ -1287,7 +1287,7 @@
                                                ((__GPIOx__) == (GPIOH))? 7U :\
                                                ((__GPIOx__) == (GPIOI))? 8U :\
                                                ((__GPIOx__) == (GPIOJ))? 9U : 10U)
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F469xx || STM32F479xx */
 
 #if defined(STM32F410Tx) || defined(STM32F410Cx) || defined(STM32F410Rx) 
 #define GPIO_GET_INDEX(__GPIOx__)    (uint8_t)(((__GPIOx__) == (GPIOA))? 0U :\
@@ -1338,8 +1338,8 @@
 /** @defgroup GPIOEx_IS_Alternat_function_selection GPIO Check Alternate Function
   * @{
   */  
-/*------------------------- STM32F407xx/STM32F439xx---------------------------*/
-#if defined(STM32F407xx) || defined(STM32F439xx)
+/*------------------------- STM32F429xx/STM32F439xx---------------------------*/
+#if defined(STM32F429xx) || defined(STM32F439xx)
 #define IS_GPIO_AF(AF)   (((AF) == GPIO_AF0_RTC_50Hz)   || ((AF) == GPIO_AF9_TIM14)      || \
                           ((AF) == GPIO_AF0_MCO)        || ((AF) == GPIO_AF0_TAMPER)     || \
                           ((AF) == GPIO_AF0_SWJ)        || ((AF) == GPIO_AF0_TRACE)      || \
@@ -1363,7 +1363,7 @@
                           ((AF) == GPIO_AF12_FMC)       ||  ((AF) == GPIO_AF6_SAI1)      || \
                           ((AF) == GPIO_AF14_LTDC))
 
-#endif /* STM32F407xx || STM32F439xx */
+#endif /* STM32F429xx || STM32F439xx */
 /*----------------------------------------------------------------------------*/
 
 /*---------------------------------- STM32F427xx/STM32F437xx------------------*/

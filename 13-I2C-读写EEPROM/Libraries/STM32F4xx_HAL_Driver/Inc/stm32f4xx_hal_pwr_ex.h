@@ -41,7 +41,7 @@
 /** @defgroup PWREx_Exported_Constants PWREx Exported Constants
   * @{
   */
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) ||\
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) ||\
     defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)
    
 /** @defgroup PWREx_Regulator_state_in_UnderDrive_mode PWREx Regulator state in UnderDrive mode
@@ -62,7 +62,7 @@
 /**
   * @}
   */
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
 
 /** @defgroup PWREx_Regulator_Voltage_Scale PWREx Regulator Voltage Scale
   * @{
@@ -143,7 +143,7 @@
                                                           } while(0U)
 #endif /* STM32F405xx || STM32F407xx || STM32F415xx || STM32F417xx */ 
 
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) ||\
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) ||\
     defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)
 /** @brief Macros to enable or disable the Over drive mode.
   * @note  These macros can be used only for STM32F42xx/STM3243xx devices.
@@ -189,7 +189,7 @@
   */
 #define __HAL_PWR_CLEAR_ODRUDR_FLAG() (PWR->CSR |= PWR_FLAG_UDRDY)
 
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
 /**
   * @}
   */
@@ -219,12 +219,12 @@ void HAL_PWREx_DisableLowRegulatorLowVoltage(void);
 #endif /* STM32F410xx || STM32F401xC || STM32F401xE || STM32F411xE || STM32F412Zx || STM32F412Vx ||\
           STM32F412Rx || STM32F412Cx || STM32F413xx || STM32F423xx */
 
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) || defined(STM32F446xx) ||\
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F446xx) ||\
     defined(STM32F469xx) || defined(STM32F479xx)
 HAL_StatusTypeDef HAL_PWREx_EnableOverDrive(void);
 HAL_StatusTypeDef HAL_PWREx_DisableOverDrive(void);
 HAL_StatusTypeDef HAL_PWREx_EnterUnderDriveSTOPMode(uint32_t Regulator, uint8_t STOPEntry);
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
 
 /**
   * @}
@@ -293,11 +293,11 @@ HAL_StatusTypeDef HAL_PWREx_EnterUnderDriveSTOPMode(uint32_t Regulator, uint8_t 
 /** @defgroup PWREx_IS_PWR_Definitions PWREx Private macros to check input parameters
   * @{
   */
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) ||\
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) ||\
     defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)
 #define IS_PWR_REGULATOR_UNDERDRIVE(REGULATOR) (((REGULATOR) == PWR_MAINREGULATOR_UNDERDRIVE_ON) || \
                                                 ((REGULATOR) == PWR_LOWPOWERREGULATOR_UNDERDRIVE_ON))
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
 
 #if defined(STM32F405xx) || defined(STM32F407xx) || defined(STM32F415xx) || defined(STM32F417xx)
 #define IS_PWR_VOLTAGE_SCALING_RANGE(VOLTAGE) (((VOLTAGE) == PWR_REGULATOR_VOLTAGE_SCALE1) || \

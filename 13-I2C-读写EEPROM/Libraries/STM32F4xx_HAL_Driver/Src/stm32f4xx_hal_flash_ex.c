@@ -13,7 +13,7 @@
   ==============================================================================
            
   [..] Comparing to other previous devices, the FLASH interface for STM32F427xx/437xx and 
-       STM32F407xx/439xx devices contains the following additional features 
+       STM32F429xx/439xx devices contains the following additional features 
        
        (+) Capacity up to 2 Mbyte with dual bank architecture supporting read-while-write
            capability (RWW)
@@ -23,7 +23,7 @@
                       ##### How to use this driver #####
   ==============================================================================
   [..] This driver provides functions to configure and program the FLASH memory 
-       of all STM32F427xx/437xx, STM32F407xx/439xx, STM32F469xx/479xx and STM32F446xx 
+       of all STM32F427xx/437xx, STM32F429xx/439xx, STM32F469xx/479xx and STM32F446xx 
        devices. It includes
       (#) FLASH Memory Erase functions: 
            (++) Lock and Unlock the FLASH interface using HAL_FLASH_Unlock() and 
@@ -118,11 +118,11 @@ static HAL_StatusTypeDef  FLASH_OB_DisablePCROP(uint32_t Sector);
 #endif /* STM32F401xC || STM32F401xE || STM32F410xx || STM32F411xE || STM32F446xx || STM32F412Zx || STM32F412Vx || STM32F412Rx || STM32F412Cx
           STM32F413xx || STM32F423xx */
 
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx)|| defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx) 
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx)|| defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx) 
 static HAL_StatusTypeDef FLASH_OB_EnablePCROP(uint32_t SectorBank1, uint32_t SectorBank2, uint32_t Banks);
 static HAL_StatusTypeDef FLASH_OB_DisablePCROP(uint32_t SectorBank1, uint32_t SectorBank2, uint32_t Banks);
 static HAL_StatusTypeDef FLASH_OB_BootConfig(uint8_t BootConfig);
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F469xx || STM32F479xx */
 
 extern HAL_StatusTypeDef         FLASH_WaitForLastOperation(uint32_t Timeout);
 /**
@@ -359,7 +359,7 @@ void HAL_FLASHEx_OBGetConfig(FLASH_OBProgramInitTypeDef *pOBInit)
   pOBInit->BORLevel = (uint32_t)FLASH_OB_GetBOR();
 }
 
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) ||\
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) ||\
     defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F410Tx) || defined(STM32F410Cx) ||\
     defined(STM32F410Rx) || defined(STM32F411xE) || defined(STM32F446xx) || defined(STM32F469xx) ||\
     defined(STM32F479xx) || defined(STM32F412Zx) || defined(STM32F412Vx) || defined(STM32F412Rx) ||\
@@ -390,7 +390,7 @@ HAL_StatusTypeDef HAL_FLASHEx_AdvOBProgram (FLASH_AdvOBProgramInitTypeDef *pAdvO
     defined(STM32F411xE) || defined(STM32F446xx) || defined(STM32F412Zx) || defined(STM32F412Vx) || defined(STM32F412Rx) ||\
     defined(STM32F412Cx) || defined(STM32F413xx) || defined(STM32F423xx)
       status = FLASH_OB_EnablePCROP(pAdvOBInit->Sectors);
-#else  /* STM32F427xx || STM32F437xx || STM32F407xx|| STM32F439xx || STM32F469xx || STM32F479xx */
+#else  /* STM32F427xx || STM32F437xx || STM32F429xx|| STM32F439xx || STM32F469xx || STM32F479xx */
       status = FLASH_OB_EnablePCROP(pAdvOBInit->SectorsBank1, pAdvOBInit->SectorsBank2, pAdvOBInit->Banks);
 #endif /* STM32F401xC || STM32F401xE || STM32F410xx || STM32F411xE || STM32F446xx || STM32F412Zx || STM32F412Vx || STM32F412Rx || STM32F412Cx ||
           STM32F413xx || STM32F423xx */
@@ -402,20 +402,20 @@ HAL_StatusTypeDef HAL_FLASHEx_AdvOBProgram (FLASH_AdvOBProgramInitTypeDef *pAdvO
     defined(STM32F411xE) || defined(STM32F446xx) || defined(STM32F412Zx) || defined(STM32F412Vx) || defined(STM32F412Rx) ||\
     defined(STM32F412Cx) || defined(STM32F413xx) || defined(STM32F423xx)
       status = FLASH_OB_DisablePCROP(pAdvOBInit->Sectors);
-#else /* STM32F427xx || STM32F437xx || STM32F407xx|| STM32F439xx || STM32F469xx || STM32F479xx */
+#else /* STM32F427xx || STM32F437xx || STM32F429xx|| STM32F439xx || STM32F469xx || STM32F479xx */
       status = FLASH_OB_DisablePCROP(pAdvOBInit->SectorsBank1, pAdvOBInit->SectorsBank2, pAdvOBInit->Banks);
 #endif /* STM32F401xC || STM32F401xE || STM32F410xx || STM32F411xE || STM32F446xx || STM32F412Zx || STM32F412Vx || STM32F412Rx || STM32F412Cx ||
           STM32F413xx || STM32F423xx */
     }
   }
    
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx)
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx)
   /*Program BOOT config option byte*/
   if(((pAdvOBInit->OptionType) & OPTIONBYTE_BOOTCONFIG) == OPTIONBYTE_BOOTCONFIG)
   {
     status = FLASH_OB_BootConfig(pAdvOBInit->BootConfig);
   }
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F469xx || STM32F479xx */
 
   return status;
 }
@@ -434,7 +434,7 @@ void HAL_FLASHEx_AdvOBGetConfig(FLASH_AdvOBProgramInitTypeDef *pAdvOBInit)
     defined(STM32F412Cx) || defined(STM32F413xx) || defined(STM32F423xx)
   /*Get Sector*/
   pAdvOBInit->Sectors = (*(__IO uint16_t *)(OPTCR_BYTE2_ADDRESS));
-#else  /* STM32F427xx || STM32F437xx || STM32F407xx|| STM32F439xx || STM32F469xx || STM32F479xx */
+#else  /* STM32F427xx || STM32F437xx || STM32F429xx|| STM32F439xx || STM32F469xx || STM32F479xx */
   /*Get Sector for Bank1*/
   pAdvOBInit->SectorsBank1 = (*(__IO uint16_t *)(OPTCR_BYTE2_ADDRESS));
 
@@ -496,11 +496,11 @@ HAL_StatusTypeDef HAL_FLASHEx_OB_DeSelectPCROP(void)
   
   return HAL_OK;
 }
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F401xC || STM32F401xE || STM32F410xx ||\
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F401xC || STM32F401xE || STM32F410xx ||\
           STM32F411xE || STM32F469xx || STM32F479xx || STM32F412Zx || STM32F412Vx || STM32F412Rx || STM32F412Cx ||
           STM32F413xx || STM32F423xx */
 
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx)|| defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx)
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx)|| defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx)
 /**
   * @brief  Returns the FLASH Write Protection Option Bytes value for Bank 2
   * @note   This function can be used only for STM32F42xxx/STM32F43xxx/STM32F469xx/STM32F479xx devices.  
@@ -511,13 +511,13 @@ uint16_t HAL_FLASHEx_OB_GetBank2WRP(void)
   /* Return the FLASH write protection Register value */
   return (*(__IO uint16_t *)(OPTCR1_BYTE2_ADDRESS));
 }
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F469xx || STM32F479xx */
 
 /**
   * @}
   */
   
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx)
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx)
 /**
   * @brief  Full erase of FLASH memory sectors 
   * @param  VoltageRange The device voltage range which defines the erase parallelism.  
@@ -924,7 +924,7 @@ static HAL_StatusTypeDef FLASH_OB_DisablePCROP(uint32_t SectorBank1, uint32_t Se
 
 }
 
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F469xx || STM32F479xx */
 
 #if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) ||\
     defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F410Tx) || defined(STM32F410Cx) ||\

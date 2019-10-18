@@ -30,16 +30,16 @@
   #include "stm32f4xx_ll_fsmc.h"
 #endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx */
 
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx)
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx)
   #include "stm32f4xx_ll_fmc.h"
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx */
 
 /** @addtogroup STM32F4xx_HAL_Driver
   * @{
   */
 
 #if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) ||\
-    defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx)
+    defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx)
 
 /** @addtogroup PCCARD
   * @{
@@ -271,7 +271,7 @@ HAL_PCCARD_StatusTypeDef HAL_PCCARD_ReadStatus(PCCARD_HandleTypeDef *hpccard);
   */
 
 #endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx ||\
-          STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx */
+          STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx */
 
 
 /**

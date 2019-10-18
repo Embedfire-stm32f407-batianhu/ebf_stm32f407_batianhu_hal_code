@@ -281,7 +281,7 @@ static HAL_StatusTypeDef USART_WaitOnFlagUntilTimeout(USART_HandleTypeDef *husar
     procedures (details for the procedures are available in reference manual
     (RM0430 for STM32F4X3xx MCUs and RM0402 for STM32F412xx MCUs
      RM0383 for STM32F411xC/E MCUs and RM0401 for STM32F410xx MCUs
-     RM0090 for STM32F4X5xx/STM32F4X7xx/STM32F407xx/STM32F439xx MCUs
+     RM0090 for STM32F4X5xx/STM32F4X7xx/STM32F429xx/STM32F439xx MCUs
      RM0390 for STM32F446xx MCUs and RM0386 for STM32F469xx/STM32F479xx MCUs)).
 
 @endverbatim

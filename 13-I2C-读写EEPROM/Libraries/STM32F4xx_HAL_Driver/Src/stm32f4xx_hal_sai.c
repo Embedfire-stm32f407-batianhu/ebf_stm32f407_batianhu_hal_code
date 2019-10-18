@@ -53,7 +53,7 @@
        STM32F4 devices :
        (+@) For STM32F446xx devices, the configuration is managed through RCCEx_PeriphCLKConfig()
             function in the HAL RCC drivers
-       (+@) For STM32F439xx/STM32F437xx/STM32F407xx/STM32F427xx devices, the configuration
+       (+@) For STM32F439xx/STM32F437xx/STM32F429xx/STM32F427xx devices, the configuration
             is managed within HAL SAI drivers through HAL_SAI_Init() function using
             ClockSource field of SAI_InitTypeDef structure.
   [..]
@@ -220,7 +220,7 @@
 
 #ifdef HAL_SAI_MODULE_ENABLED
 
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) ||\
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) ||\
     defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx) || defined(STM32F413xx) ||\
     defined(STM32F423xx)
 
@@ -2497,7 +2497,7 @@ static void SAI_DMAAbort(DMA_HandleTypeDef *hdma)
   * @}
   */
 
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx || STM32F413xx || STM32F423xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx || STM32F413xx || STM32F423xx */
 #endif /* HAL_SAI_MODULE_ENABLED */
 /**
   * @}

@@ -1132,7 +1132,7 @@
   */
 
 #if defined(STM32L4) || defined(STM32F7) || defined(STM32F427xx) || defined(STM32F437xx) \
-  || defined(STM32F407xx) || defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx) \
+  || defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx) \
   || defined(STM32H7)
 /** @defgroup HAL_DMA2D_Aliased_Defines HAL DMA2D Aliased Defines maintained for legacy purpose
   * @{

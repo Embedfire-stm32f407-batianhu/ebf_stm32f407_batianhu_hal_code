@@ -220,10 +220,10 @@ typedef struct
           STM32F412Vx || STM32F412Rx || STM32F412Cx */
 
 #if defined(STM32F411xE) || defined(STM32F413xx) || defined(STM32F423xx) || defined(STM32F427xx) || defined(STM32F437xx) ||\
-    defined(STM32F407xx) || defined(STM32F439xx) || defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx) 
+    defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx) 
 #define ADC_CHANNEL_DIFFERENCIATION_TEMPSENSOR_VBAT 0x10000000U /* Dummy bit for driver internal usage, not used in ADC channel setting registers CR1 or SQRx */
 #define ADC_CHANNEL_TEMPSENSOR  ((uint32_t)ADC_CHANNEL_18 | ADC_CHANNEL_DIFFERENCIATION_TEMPSENSOR_VBAT)
-#endif /* STM32F411xE || STM32F413xx || STM32F423xx || STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F411xE || STM32F413xx || STM32F423xx || STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
 /**
   * @}
   */ 
@@ -237,7 +237,7 @@ typedef struct
 /** @defgroup ADC_Exported_Macros ADC Exported Macros
   * @{
   */
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx)|| defined(STM32F439xx)
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx)|| defined(STM32F439xx)
 /**
   * @brief Disable internal path of ADC channel Vbat
   * @note  Use case of this macro:
@@ -250,7 +250,7 @@ typedef struct
   * @retval None
   */
 #define __HAL_ADC_PATH_INTERNAL_VBAT_DISABLE() (ADC->CCR &= ~(ADC_CCR_VBATE))
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx */
 /**
   * @}
   */ 
@@ -310,11 +310,11 @@ HAL_StatusTypeDef HAL_ADCEx_MultiModeConfigChannel(ADC_HandleTypeDef* hadc, ADC_
 #endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx || STM32F401xC || STM32F401xE || STM32F410xx || STM32F411xE ||
           STM32F412Zx || STM32F412Vx || STM32F412Rx || STM32F412Cx || STM32F413xx || STM32F423xx */
 
-#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F407xx) || defined(STM32F439xx) || \
+#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || \
     defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)
 #define IS_ADC_CHANNEL(CHANNEL) (((CHANNEL) <= ADC_CHANNEL_18)  || \
                                  ((CHANNEL) == ADC_CHANNEL_TEMPSENSOR))
-#endif /* STM32F427xx || STM32F437xx || STM32F407xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
 
 #define IS_ADC_MODE(MODE) (((MODE) == ADC_MODE_INDEPENDENT)                 || \
                            ((MODE) == ADC_DUALMODE_REGSIMULT_INJECSIMULT)   || \
@@ -372,11 +372,11 @@ HAL_StatusTypeDef HAL_ADCEx_MultiModeConfigChannel(ADC_HandleTypeDef* hadc, ADC_
   * @param __HANDLE__ ADC handle
   * @retval Common control register ADC123 or ADC1
   */
-#if defined(STM32F405xx) || defined(STM32F407xx) || defined(STM32F415xx) || defined(STM32F417xx) || defined(STM32F427xx) || defined(STM32F407xx) || defined(STM32F437xx) || defined(STM32F439xx) || defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)
+#if defined(STM32F405xx) || defined(STM32F407xx) || defined(STM32F415xx) || defined(STM32F417xx) || defined(STM32F427xx) || defined(STM32F429xx) || defined(STM32F437xx) || defined(STM32F439xx) || defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)
 #define ADC_COMMON_REGISTER(__HANDLE__)                ADC123_COMMON
 #else
 #define ADC_COMMON_REGISTER(__HANDLE__)                ADC1_COMMON
-#endif /* STM32F405xx || STM32F407xx || STM32F415xx || STM32F417xx || STM32F427xx || STM32F407xx || STM32F437xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
+#endif /* STM32F405xx || STM32F407xx || STM32F415xx || STM32F417xx || STM32F427xx || STM32F429xx || STM32F437xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
 /**
   * @}
   */

@@ -36,7 +36,7 @@ uint8_t I2C_Test(void);
 int main(void)
 {
   HAL_Init();        
-  /* 配置系统时钟为180 MHz */ 
+  /* 配置系统时钟为168 MHz */ 
   SystemClock_Config();
 	/* 初始化RGB彩灯 */ 
   LED_GPIO_Config(); 
