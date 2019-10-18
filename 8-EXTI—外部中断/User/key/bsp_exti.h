@@ -16,7 +16,6 @@
 #define KEY2_INT_GPIO_PIN                 GPIO_PIN_13
 #define KEY2_INT_EXTI_IRQ                 EXTI15_10_IRQn
 #define KEY2_IRQHandler                   EXTI15_10_IRQHandler
-
 /*******************************************************/
 
 
