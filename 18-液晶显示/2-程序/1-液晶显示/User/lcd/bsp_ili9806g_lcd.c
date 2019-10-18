@@ -115,19 +115,17 @@ static void ILI9806G_Delay ( __IO uint32_t nCount )
 static void ILI9806G_GPIO_Config ( void )
 {
 	GPIO_InitTypeDef  GPIO_Initure;
-
     /* Enable GPIOs clock */
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_FSMC_CLK_ENABLE();			//使能FSMC时钟
-  
     /* Common GPIO configuration */
-  GPIO_Initure.Mode      = GPIO_MODE_OUTPUT_PP;  //推挽输出
+  GPIO_Initure.Mode      = GPIO_MODE_OUTPUT_PP; //推挽输出
   GPIO_Initure.Pull      = GPIO_PULLUP;
   GPIO_Initure.Speed     = GPIO_SPEED_HIGH;
-  
+ 
   GPIO_Initure.Pin=GPIO_PIN_10;
 	HAL_GPIO_Init(GPIOG,&GPIO_Initure);
   
@@ -151,7 +149,6 @@ static void ILI9806G_GPIO_Config ( void )
 	//初始化PF9
 	GPIO_Initure.Pin=GPIO_PIN_0|GPIO_PIN_9;
 	HAL_GPIO_Init(GPIOF,&GPIO_Initure);
-
 }
 
 
@@ -164,7 +161,7 @@ static void ILI9806G_FSMC_Config ( void )
 {
    SRAM_Handler.Instance = FMC_NORSRAM_DEVICE;
    SRAM_Handler.Extended = FMC_NORSRAM_EXTENDED_DEVICE;
-  
+   __HAL_RCC_FSMC_CLK_ENABLE();	
   /* SRAM device configuration */  
   Timing.AddressSetupTime      = 0x04;
   Timing.AddressHoldTime       = 0x00;
@@ -173,23 +170,32 @@ static void ILI9806G_FSMC_Config ( void )
   Timing.CLKDivision           = 0x00;
   Timing.DataLatency           = 0x00;
   Timing.AccessMode            = FSMC_ACCESS_MODE_B;
- 
-  SRAM_Handler.Init.NSBank=FSMC_NORSRAM_BANK3;     					        //使用NE3
-	SRAM_Handler.Init.DataAddressMux=FSMC_DATA_ADDRESS_MUX_DISABLE; 	//地址/数据线不复用
-	SRAM_Handler.Init.MemoryType= FSMC_MEMORY_TYPE_NOR;   				    //NOR
-	SRAM_Handler.Init.MemoryDataWidth=FSMC_NORSRAM_MEM_BUS_WIDTH_16; 	//16位数据宽度
-	SRAM_Handler.Init.BurstAccessMode=FSMC_BURST_ACCESS_MODE_DISABLE; //是否使能突发访问,仅对同步突发存储器有效,此处未用到
-	SRAM_Handler.Init.WaitSignalPolarity=FSMC_WAIT_SIGNAL_POLARITY_LOW;//等待信号的极性,仅在突发模式访问下有用
-	SRAM_Handler.Init.WaitSignalActive=FSMC_WAIT_TIMING_BEFORE_WS;   	//存储器是在等待周期之前的一个时钟周期还是等待周期期间使能NWAIT
-	SRAM_Handler.Init.WriteOperation=FSMC_WRITE_OPERATION_ENABLE;    	//存储器写使能
-	SRAM_Handler.Init.WaitSignal=FSMC_WAIT_SIGNAL_DISABLE;           	//等待使能位,此处未用到
-	SRAM_Handler.Init.ExtendedMode=FSMC_EXTENDED_MODE_DISABLE;        //读写使用相同的时序
-	SRAM_Handler.Init.AsynchronousWait=FSMC_ASYNCHRONOUS_WAIT_DISABLE;//是否使能同步传输模式下的等待信号,此处未用到
-	SRAM_Handler.Init.WriteBurst=FSMC_WRITE_BURST_DISABLE;           	//禁止突发写
+ //使用NE3
+  SRAM_Handler.Init.NSBank=FSMC_NORSRAM_BANK3;     					        
+	//地址/数据线不复用
+	SRAM_Handler.Init.DataAddressMux=FSMC_DATA_ADDRESS_MUX_DISABLE; 	
+	//NOR
+	SRAM_Handler.Init.MemoryType= FSMC_MEMORY_TYPE_NOR;   				    
+	//16位数据宽度
+	SRAM_Handler.Init.MemoryDataWidth=FSMC_NORSRAM_MEM_BUS_WIDTH_16; 	
+	//是否使能突发访问,仅对同步突发存储器有效,此处未用到
+	SRAM_Handler.Init.BurstAccessMode=FSMC_BURST_ACCESS_MODE_DISABLE; 
+	//等待信号的极性,仅在突发模式访问下有用
+	SRAM_Handler.Init.WaitSignalPolarity=FSMC_WAIT_SIGNAL_POLARITY_LOW;
+	//存储器是在等待周期之前的一个时钟周期还是等待周期期间使能NWAIT
+	SRAM_Handler.Init.WaitSignalActive=FSMC_WAIT_TIMING_BEFORE_WS;   	
+	//存储器写使能
+	SRAM_Handler.Init.WriteOperation=FSMC_WRITE_OPERATION_ENABLE;    	
+	//等待使能位,此处未用到
+	SRAM_Handler.Init.WaitSignal=FSMC_WAIT_SIGNAL_DISABLE;           	
+	//读写使用相同的时序
+	SRAM_Handler.Init.ExtendedMode=FSMC_EXTENDED_MODE_DISABLE;        
+	//是否使能同步传输模式下的等待信号,此处未用到
+	SRAM_Handler.Init.AsynchronousWait=FSMC_ASYNCHRONOUS_WAIT_DISABLE;
+	//禁止突发写
+	SRAM_Handler.Init.WriteBurst=FSMC_WRITE_BURST_DISABLE;           	
   SRAM_Handler.Init.ContinuousClock=FSMC_CONTINUOUS_CLOCK_SYNC_ASYNC;
-  
 	HAL_SRAM_Init(&SRAM_Handler,&Timing,&Timing);	
-		
 }
 
 

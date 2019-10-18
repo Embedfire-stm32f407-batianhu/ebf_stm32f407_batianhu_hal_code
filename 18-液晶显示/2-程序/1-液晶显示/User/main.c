@@ -36,30 +36,23 @@ void Printf_Charater(void)   ;
   */
 int main(void)
 {
-  /* 系统时钟初始化成216 MHz */
+  /* 系统时钟初始化成168MHz */
   SystemClock_Config();
   /* LED 端口初始化 */
   LED_GPIO_Config();	 
   /* 初始化串口 */
   DEBUG_USART_Config();
-
   ILI9806G_Init ();         //LCD 初始化
-	
 	printf("\r\n ********** 液晶屏英文显示程序*********** \r\n"); 
 	printf("\r\n 本程序不支持中文，显示中文的程序请学习下一章 \r\n"); 
-
 	//其中0、3、5、6 模式适合从左至右显示文字，
  //不推荐使用其它模式显示文字	其它模式显示文字会有镜像效果			
  //其中 6 模式为大部分液晶例程的默认显示方向  
-  ILI9806G_GramScan ( 6 );
-
-	    
+  ILI9806G_GramScan ( 6 );    
 	while ( 1 )
 	{
 		LCD_Test();
 	}
-	
-	
 }
 
 

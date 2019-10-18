@@ -37,22 +37,15 @@ void Printf_Charater(void)   ;
 int main ( void )
 {
   SystemClock_Config();
-  
   LED_GPIO_Config();
-	
 	ILI9806G_Init ();         //LCD 初始化
-
 	DEBUG_USART_Config();		
-	
 	printf("\r\n ********** 液晶屏英文显示程序*********** \r\n"); 
 	printf("\r\n 本程序不支持中文，显示中文的程序请学习下一章 \r\n"); 
-	
-	    
 	while ( 1 )
 	{
 		//展示LCD的八种方向模式
 		LCD_Direction_Show();
-
 	}	
 }
 
