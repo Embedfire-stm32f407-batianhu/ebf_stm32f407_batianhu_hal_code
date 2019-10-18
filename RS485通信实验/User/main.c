@@ -46,8 +46,8 @@ int main(void)
 	
 	Key_GPIO_Config();
 	
-	printf("\r\n 欢迎使用秉火  STM32 F429 开发板。\r\n");
-  printf("\r\n 秉火F429 485通讯实验例程\r\n");
+	printf("\r\n 欢迎使用秉火  STM32 F407 开发板。\r\n");
+  printf("\r\n 秉火F407 485通讯实验例程\r\n");
 	
 	printf("\r\n 实验步骤：\r\n");
 

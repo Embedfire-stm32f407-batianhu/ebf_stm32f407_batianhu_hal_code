@@ -38,7 +38,7 @@ int main(void)
 	/*初始化LED*/
 	LED_GPIO_Config();
 
-	printf("\r\n 欢迎使用野火  STM32 F429 开发板。\r\n");	
+	printf("\r\n 欢迎使用野火  STM32 F407 开发板。\r\n");	
 	printf("正在进行读写内部FLASH实验，请耐心等待\r\n");
 	
 	if(InternalFlash_Test()==0)
