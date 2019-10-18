@@ -56,7 +56,7 @@ int main(void)
 {
 	/* 定义存放比较结果变量 */
 	uint8_t TransferStatus;
-	/* 系统时钟初始化成216 MHz */
+	/* 系统时钟初始化成168 MHz */
 	SystemClock_Config();
 	/* LED 端口初始化 */
 	LED_GPIO_Config();
