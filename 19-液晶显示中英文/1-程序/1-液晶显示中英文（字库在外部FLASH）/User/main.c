@@ -78,7 +78,7 @@ void LCD_Test(void)
 
   ILI9806G_Clear(0,0,LCD_X_LENGTH,LCD_Y_LENGTH);	/* 清屏，显示全黑 */
 	/********显示字符串示例*******/ 
-  ILI9806G_DispStringLine_EN_CH(LINE(0),"秉火4.5寸LCD参数：");
+  ILI9806G_DispStringLine_EN_CH(LINE(0),"野火4.5寸LCD参数：");
   ILI9806G_DispStringLine_EN_CH(LINE(2),"分辨率：480x854 px");
   ILI9806G_DispStringLine_EN_CH(LINE(3),"ILI9806G液晶驱动");
   ILI9806G_DispStringLine_EN_CH(LINE(4),"GT5688触摸屏驱动");
