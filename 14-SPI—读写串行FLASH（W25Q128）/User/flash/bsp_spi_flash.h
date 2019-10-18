@@ -38,7 +38,7 @@
 #define Dummy_Byte                0xFF
 /*命令定义-结尾*******************************/
 
-
+ //SPI号及时钟初始化函数
 #define SPIx                             SPI1
 #define SPIx_CLK_ENABLE()                __HAL_RCC_SPI1_CLK_ENABLE()
 #define SPIx_SCK_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOB_CLK_ENABLE()
@@ -49,23 +49,25 @@
 #define SPIx_FORCE_RESET()               __HAL_RCC_SPI1_FORCE_RESET()
 #define SPIx_RELEASE_RESET()             __HAL_RCC_SPI1_RELEASE_RESET()
 
-/* Definition for SPIx Pins */
+//SCK引脚
 #define SPIx_SCK_PIN                     GPIO_PIN_3
 #define SPIx_SCK_GPIO_PORT               GPIOB
 #define SPIx_SCK_AF                      GPIO_AF5_SPI1
+//MISO引脚
 #define SPIx_MISO_PIN                    GPIO_PIN_4
 #define SPIx_MISO_GPIO_PORT              GPIOB
 #define SPIx_MISO_AF                     GPIO_AF5_SPI1
+//MOSI引脚
 #define SPIx_MOSI_PIN                    GPIO_PIN_5
 #define SPIx_MOSI_GPIO_PORT              GPIOB
 #define SPIx_MOSI_AF                     GPIO_AF5_SPI1
-
+//CS(NSS)引脚
 #define FLASH_CS_PIN                     GPIO_PIN_6               
 #define FLASH_CS_GPIO_PORT               GPIOG                     
-
-
-#define	digitalHi(p,i)			    {p->BSRR=i;}			  //设置为高电平		
-#define digitalLo(p,i)			    {p->BSRR=(uint32_t)i << 16;}				//输出低电平
+//设置为高电平	
+#define	digitalHi(p,i)			    {p->BSRR=i;}		
+//输出低电平
+#define digitalLo(p,i)			    {p->BSRR=(uint32_t)i << 16;}				
 #define SPI_FLASH_CS_LOW()      digitalLo(FLASH_CS_GPIO_PORT,FLASH_CS_PIN )
 #define SPI_FLASH_CS_HIGH()     digitalHi(FLASH_CS_GPIO_PORT,FLASH_CS_PIN )
 /*SPI接口定义-结尾****************************/
