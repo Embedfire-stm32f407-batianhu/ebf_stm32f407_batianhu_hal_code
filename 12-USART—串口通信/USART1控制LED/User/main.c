@@ -52,7 +52,7 @@ int main(void)
   char ch;   
   
   HAL_Init();        
-  /* 配置系统时钟为180 MHz */ 
+  /* 配置系统时钟为168 MHz */ 
   SystemClock_Config();
 	/* 初始化RGB彩灯 */ 
   LED_GPIO_Config(); 
@@ -173,3 +173,6 @@ int main(void)
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+
+
