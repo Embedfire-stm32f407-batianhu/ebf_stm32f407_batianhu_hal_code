@@ -29,7 +29,7 @@ void Delay(__IO uint32_t nCount);
   */
 int main(void)
 {
-  /* 系统时钟初始化成216 MHz */
+  /* 系统时钟初始化成168 MHz */
   SystemClock_Config();
 
 	/*蜂鸣器端口初始化 */

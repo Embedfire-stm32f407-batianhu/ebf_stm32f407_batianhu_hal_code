@@ -30,7 +30,7 @@ void SystemClock_Config(void);
   */
 int main(void)
 {    
-    /* 配置系统时钟为216 MHz */
+    /* 配置系统时钟为168 MHz */
     SystemClock_Config();
 	
     /*初始化USART 配置模式为 115200 8-N-1*/
@@ -45,17 +45,14 @@ int main(void)
 	{
 		LED_GREEN;
 		printf("读写内部FLASH测试成功\r\n");
-
 	}
 	else
 	{
 		printf("读写内部FLASH测试失败\r\n");
 		LED_RED;
 	}
-
 	while(1)
 	{
-		
 	}
 }
 

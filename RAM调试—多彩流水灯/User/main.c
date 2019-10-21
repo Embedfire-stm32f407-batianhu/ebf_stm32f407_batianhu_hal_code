@@ -29,7 +29,7 @@ static void SystemClock_Config(void);
   */
 int main(void)
 {
-    /* 系统时钟初始化成216 MHz */
+    /* 系统时钟初始化成168 MHz */
     SystemClock_Config();
 
     /* LED 端口初始化 */

@@ -8,8 +8,8 @@ extern CAN_HandleTypeDef Can_Handle;
 
 #define CANx                       CAN2
 #define CAN_CLK_ENABLE()           __CAN2_CLK_ENABLE()
-#define CAN_RX_IRQ				   CAN2_RX0_IRQn
-#define CAN_RX_IRQHandler		   CAN2_RX0_IRQHandler
+#define CAN_RX_IRQ				         CAN2_RX0_IRQn
+#define CAN_RX_IRQHandler		       CAN2_RX0_IRQHandler
 
 #define CAN_RX_PIN                 GPIO_PIN_12
 #define CAN_TX_PIN                 GPIO_PIN_13

@@ -50,7 +50,7 @@ int main(void)
   /*初始化USART1*/
   DEBUG_USART_Config();
   
-	printf("\r\n欢迎使用秉火  STM32 F407 开发板。\r\n");	
+	printf("\r\n欢迎使用野火  STM32 F407 开发板。\r\n");	
 	
 	printf("在开始进行SD卡基本测试前，请给开发板插入32G以内的SD卡\r\n");			
 	printf("本程序会对SD卡进行 非文件系统 方式读写，会删除SD卡的文件系统\r\n");		

@@ -81,10 +81,10 @@ void LCD_Test(void)
   ILI9806G_Clear(0,0,LCD_X_LENGTH,LCD_Y_LENGTH);	/* 清屏，显示全黑 */
 
 	/********显示字符串示例*******/ 
-  ILI9806G_DispStringLine_EN_CH(LINE(0),"秉火BH");
+  ILI9806G_DispStringLine_EN_CH(LINE(0),"野火BH");
 	//显示指定大小的字符 
-	ILI9806G_DisplayStringEx(0,1*48,48,48,(uint8_t *)"秉火BH",0);
-	ILI9806G_DisplayStringEx(0,2*56,56,56,(uint8_t *)"秉火BH",0);
+	ILI9806G_DisplayStringEx(0,1*48,48,48,(uint8_t *)"野火BH",0);
+	ILI9806G_DisplayStringEx(0,2*56,56,56,(uint8_t *)"野火BH",0);
 
 	/********显示变量示例*******/
 	LCD_SetTextColor(GREEN);
