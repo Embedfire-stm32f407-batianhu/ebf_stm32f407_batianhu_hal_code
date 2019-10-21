@@ -42,22 +42,16 @@ static void Delay(__IO uint32_t nCount)	 //简单的延时函数
 void I2C_GTP_IRQEnable(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure; 
-  
   /*选择要控制的GPIO引脚*/															   
   GPIO_InitStructure.Pin = GTP_INT_GPIO_PIN;	
-
   /*设置引脚的输出类型为输入*/
   GPIO_InitStructure.Mode = GPIO_MODE_IT_RISING;	
-
   /*设置引脚为上拉模式*/
   GPIO_InitStructure.Pull  =  GPIO_NOPULL;
-
   /*设置引脚速率为高速 */   
   GPIO_InitStructure.Speed = GPIO_SPEED_HIGH; 
-
   /*调用库函数，使用上面配置的GPIO_InitStructure初始化GPIO*/
   HAL_GPIO_Init(GTP_INT_GPIO_PORT, &GPIO_InitStructure);	
-
   /* 配置 EXTI 中断源 到key1 引脚、配置中断优先级*/
   HAL_NVIC_SetPriority(GTP_INT_EXTI_IRQ , 1, 1);
   /* 使能中断 */
@@ -71,31 +65,21 @@ void I2C_GTP_IRQEnable(void)
   */
 void I2C_GTP_IRQDisable(void)
 {
-
   GPIO_InitTypeDef GPIO_InitStructure;
-  
-  
   /*选择要控制的GPIO引脚*/															   
   GPIO_InitStructure.Pin = GTP_INT_GPIO_PIN;	
-
   /*设置引脚的输出类型为输入*/
   GPIO_InitStructure.Mode = GPIO_MODE_IT_RISING;	  
-
   /*设置引脚为上拉模式*/
- GPIO_InitStructure.Pull  =  GPIO_NOPULL;
-
+  GPIO_InitStructure.Pull  =  GPIO_NOPULL;
   /*设置引脚速率为高速 */   
   GPIO_InitStructure.Speed = GPIO_SPEED_HIGH; 
-
   /*调用库函数，使用上面配置的GPIO_InitStructure初始化GPIO*/
   HAL_GPIO_Init(GTP_INT_GPIO_PORT, &GPIO_InitStructure);	
-  
   /* 配置 EXTI 中断源 、配置中断优先级*/
   HAL_NVIC_SetPriority(GTP_INT_EXTI_IRQ , 1, 1);
-  
     /* 使能中断 */
   HAL_NVIC_DisableIRQ(GTP_INT_EXTI_IRQ );
-  
 }
 
 /**
@@ -106,48 +90,35 @@ void I2C_GTP_IRQDisable(void)
 static void I2C_GPIO_Config(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;  
-  
   /*使能触摸屏使用的引脚的时钟*/
   GTP_I2C_SCL_CLK();
   GTP_I2C_SDA_CLK();
   GTP_I2C_RST_CLK(); 
   GTP_I2C_GTP_CLK();
-  
    /*选择要控制的GPIO引脚*/															   
   GPIO_InitStructure.Pin = GTP_I2C_SCL_PIN;	
-
   /*设置引脚的输出类型为输入*/
- GPIO_InitStructure.Mode  =  GPIO_MODE_OUTPUT_OD;  
-
+  GPIO_InitStructure.Mode  =  GPIO_MODE_OUTPUT_OD;  
   /*设置引脚为上拉模式*/
- GPIO_InitStructure.Pull  =  GPIO_NOPULL;
-
+  GPIO_InitStructure.Pull  =  GPIO_NOPULL;
   /*设置引脚速率为高速 */   
   GPIO_InitStructure.Speed = GPIO_SPEED_HIGH; 
-
   /*调用库函数，使用上面配置的GPIO_InitStructure初始化GPIO*/
   HAL_GPIO_Init(GTP_I2C_SCL_GPIO_PORT, &GPIO_InitStructure);	
-  
    /*选择要控制的GPIO引脚*/															   
   GPIO_InitStructure.Pin =GTP_I2C_SDA_PIN;	
    /*调用库函数，使用上面配置的GPIO_InitStructure初始化GPIO*/
   HAL_GPIO_Init(GTP_I2C_SDA_GPIO_PORT, &GPIO_InitStructure);
-
   /*选择要控制的GPIO引脚*/															   
   GPIO_InitStructure.Pin = GTP_RST_GPIO_PIN;	
-
   /*设置引脚的输出类型为输入*/
   GPIO_InitStructure.Mode  =  GPIO_MODE_OUTPUT_PP;  
-
   /*设置引脚为上拉模式*/
   GPIO_InitStructure.Pull  =  GPIO_PULLDOWN;
-
   /*设置引脚速率为高速 */   
   GPIO_InitStructure.Speed = GPIO_SPEED_HIGH; 
-
   /*调用库函数，使用上面配置的GPIO_InitStructure初始化GPIO*/
   HAL_GPIO_Init(GTP_RST_GPIO_PORT, &GPIO_InitStructure);	
-  
   /*选择要控制的GPIO引脚*/															   
   GPIO_InitStructure.Pin = GTP_RST_GPIO_PIN;	
    /*调用库函数，使用上面配置的GPIO_InitStructure初始化GPIO*/
@@ -163,48 +134,32 @@ static void I2C_GPIO_Config(void)
 void I2C_ResetChip(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
-
-
   /*选择要控制的GPIO引脚*/															   
   GPIO_InitStructure.Pin =GTP_INT_GPIO_PIN;	
-
   /*设置引脚的输出类型为输入*/
   GPIO_InitStructure.Mode  =  GPIO_MODE_OUTPUT_PP;  
-
   /*设置引脚为上拉模式*/
   GPIO_InitStructure.Pull  =  GPIO_PULLDOWN;
-
   /*设置引脚速率为高速 */   
   GPIO_InitStructure.Speed = GPIO_SPEED_HIGH; 
-
   /*调用库函数，使用上面配置的GPIO_InitStructure初始化GPIO*/
   HAL_GPIO_Init(GTP_INT_GPIO_PORT, &GPIO_InitStructure);	
-
-
   /*复位为低电平，为初始化做准备*/
   digitalLow (GTP_RST_GPIO_PORT,GTP_RST_GPIO_PIN);
   Delay(0x0FFFFF);
-
   /*拉高一段时间，进行初始化*/
   digitalHigh (GTP_RST_GPIO_PORT,GTP_RST_GPIO_PIN);
   Delay(0x0FFFFF);
-
-
   /*选择要控制的GPIO引脚*/															   
   GPIO_InitStructure.Pin =GTP_INT_GPIO_PIN;	
-
   /*设置引脚的输出类型为输入*/
   GPIO_InitStructure.Mode  =  GPIO_MODE_INPUT;  
-
   /*设置引脚为上拉模式*/
   GPIO_InitStructure.Pull  =  GPIO_NOPULL;
-
   /*设置引脚速率为高速 */   
   GPIO_InitStructure.Speed = GPIO_SPEED_HIGH; 
-
   /*调用库函数，使用上面配置的GPIO_InitStructure初始化GPIO*/
   HAL_GPIO_Init(GTP_INT_GPIO_PORT, &GPIO_InitStructure);	
-
 }
 
 /**
@@ -416,7 +371,6 @@ void i2c_NAck(void)
 
 #define I2C_DIR_WR	0		/* 写控制bit */
 #define I2C_DIR_RD	1		/* 读控制bit */
-
 /**
   * @brief   使用IIC读取数据
   * @param   
@@ -427,50 +381,38 @@ void i2c_NAck(void)
   */
 uint32_t I2C_ReadBytes(uint8_t ClientAddr,uint8_t* pBuffer, uint16_t NumByteToRead)
 {
-	
 	/* 第1步：发起I2C总线启动信号 */
 	i2c_Start();
-	
 	/* 第2步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
 	i2c_SendByte(ClientAddr | I2C_DIR_RD);	/* 此处是读指令 */
-	
 	/* 第3步：等待ACK */
 	if (i2c_WaitAck() != 0)
 	{
 		goto cmd_fail;	/* 器件无应答 */
 	}
-
 	while(NumByteToRead) 
   {
    if(NumByteToRead == 1)
     {
 			i2c_NAck();	/* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
-      
       /* 发送I2C总线停止信号 */
       i2c_Stop();
     }
-    
    *pBuffer = i2c_ReadByte();
-    
     /* 读指针自增 */
     pBuffer++; 
-      
     /*计数器自减 */
     NumByteToRead--;
-    
     i2c_Ack();	/* 中间字节读完后，CPU产生ACK信号(驱动SDA = 0) */  
   }
-
 	/* 发送I2C总线停止信号 */
 	i2c_Stop();
 	return 0;	/* 执行成功 */
-
 cmd_fail: /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
 	/* 发送I2C总线停止信号 */
 	i2c_Stop();
 	return 1;
 }
-
 /**
   * @brief   使用IIC写入数据
   * @param   
@@ -482,10 +424,8 @@ cmd_fail: /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
 uint32_t I2C_WriteBytes(uint8_t ClientAddr,uint8_t* pBuffer,  uint8_t NumByteToWrite)
 {
 	uint16_t m;	
-
   /*　第0步：发停止信号，启动内部写操作　*/
   i2c_Stop();
-  
   /* 通过检查器件应答的方式，判断内部写操作是否完成, 一般小于 10ms 			
     CLK频率为200KHz时，查询次数为30次左右
   */
@@ -493,10 +433,8 @@ uint32_t I2C_WriteBytes(uint8_t ClientAddr,uint8_t* pBuffer,  uint8_t NumByteToW
   {				
     /* 第1步：发起I2C总线启动信号 */
     i2c_Start();
-    
     /* 第2步：发起控制字节，高7bit是地址，bit0是读写控制位，0表示写，1表示读 */
     i2c_SendByte(ClientAddr | I2C_DIR_WR);	/* 此处是写指令 */
-    
     /* 第3步：发送一个时钟，判断器件是否正确应答 */
     if (i2c_WaitAck() == 0)
     {
@@ -507,25 +445,20 @@ uint32_t I2C_WriteBytes(uint8_t ClientAddr,uint8_t* pBuffer,  uint8_t NumByteToW
   {
     goto cmd_fail;	/* EEPROM器件写超时 */
   }	
-	
   while(NumByteToWrite--)
   {
   /* 第4步：开始写入数据 */
   i2c_SendByte(*pBuffer);
-
   /* 第5步：检查ACK */
   if (i2c_WaitAck() != 0)
   {
     goto cmd_fail;	/* 器件无应答 */
   }
-  
       pBuffer++;	/* 地址增1 */		
   }
-	
 	/* 命令执行成功，发送I2C总线停止信号 */
 	i2c_Stop();
 	return 0;
-
 cmd_fail: /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
 	/* 发送I2C总线停止信号 */
 	i2c_Stop();

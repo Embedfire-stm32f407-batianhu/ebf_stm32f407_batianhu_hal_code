@@ -39,30 +39,21 @@ void Printf_Charater(void)   ;
 int main ( void )
 {
   SystemClock_Config();
-  
   LED_GPIO_Config();
-	
 	ILI9806G_Init ();
 	/* USART config */
 	DEBUG_USART_Config();		
-
-		
 	//其中0、3、5、6 模式适合从左至右显示文字，
 	//不推荐使用其它模式显示文字	其它模式显示文字会有镜像效果			
 	//其中 6 模式为大部分液晶例程的默认显示方向  
   ILI9806G_GramScan ( 3 );	
-
 	/* 设定好液晶扫描方向后，再初始化触摸屏，触摸屏会根据液晶的扫描方向输出匹配的触摸坐标 */
 	/* 每次修改液晶扫描方向后，应重新调用一次GTP_Init_Panel函数更新触摸配置 */
 	GTP_Init_Panel(); 
-    
 	printf("\r\n ********** 触摸画板程序 *********** \r\n"); 
 	printf("\r\n 若汉字显示不正常，请阅读工程中的readme.txt文件说明，根据要求给FLASH重刷字模数据\r\n"); 
- 
-	
 	//绘制触摸画板界面
 	Palette_Init(LCD_SCAN_MODE);
-    
 	while ( 1 )
 	{
 	}
