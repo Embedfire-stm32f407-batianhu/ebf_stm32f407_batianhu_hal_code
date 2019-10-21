@@ -34,7 +34,7 @@ int main(void)
 	uint32_t PCLK2_Frequency=0;
 	uint32_t SYSCLK_Source=0;
 	
-	/* 初始化系统时钟为216MHz */
+	/* 初始化系统时钟为168MHz */
 	SystemClock_Config();
 	/* 初始化LED */
 	LED_GPIO_Config();	
@@ -43,8 +43,8 @@ int main(void)
 	/* 初始化按键为中断模式，按下中断后会进入中断服务函数	*/
 	EXTI_Key_Config(); 
 	
-	printf("\r\n 欢迎使用秉火  STM32 F407 开发板。\r\n");
-    printf("\r\n 秉火F407 停止模式例程\r\n");
+	printf("\r\n 欢迎使用野火  STM32 F407 开发板。\r\n");
+  printf("\r\n 野火F407 停止模式例程\r\n");
 	
 	printf("\r\n 实验说明：\r\n");
 

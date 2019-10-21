@@ -28,7 +28,7 @@
   */
 int main(void) 
 {
-	/* 初始化系统时钟为216MHz */
+	/* 初始化系统时钟为168MHz */
 	SystemClock_Config();
 	/* 初始化LED */
 	LED_GPIO_Config();	

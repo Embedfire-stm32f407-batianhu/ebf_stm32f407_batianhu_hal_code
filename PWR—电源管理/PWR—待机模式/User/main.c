@@ -30,7 +30,7 @@ static uint8_t KEY2_LongPress(void);
   */
 int main(void) 
 {
-	/* 初始化系统时钟为216MHz */
+	/* 初始化系统时钟为168MHz */
 	SystemClock_Config();
 	/* 初始化LED */
 	LED_GPIO_Config();	
@@ -85,9 +85,7 @@ int main(void)
 			/* 进入待机模式 */
 			HAL_PWR_EnterSTANDBYMode();
 		}
-
   }
-
 }
 /**
   * @brief  用于检测按键是否被长时间按下
