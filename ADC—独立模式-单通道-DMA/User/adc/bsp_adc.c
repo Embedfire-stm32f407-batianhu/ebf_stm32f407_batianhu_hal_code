@@ -8,10 +8,8 @@ ADC_ChannelConfTypeDef ADC_Config;
 static void Rheostat_ADC_GPIO_Config(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
-
     //  πƒ‹ GPIO  ±÷”
     RHEOSTAT_ADC_GPIO_CLK_ENABLE();
-        
     // ≈‰÷√ IO
     GPIO_InitStructure.Pin = RHEOSTAT_ADC_GPIO_PIN;
     GPIO_InitStructure.Mode = GPIO_MODE_ANALOG;	    
