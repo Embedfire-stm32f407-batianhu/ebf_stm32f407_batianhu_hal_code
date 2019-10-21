@@ -30,7 +30,7 @@ extern __IO uint16_t ChannelPulse;
   */
 int main(void) 
 {
-	/* 初始化系统时钟为216MHz */
+	/* 初始化系统时钟为168MHz */
 	SystemClock_Config();
 	/* 初始化按键GPIO */
 	Key_GPIO_Config();
