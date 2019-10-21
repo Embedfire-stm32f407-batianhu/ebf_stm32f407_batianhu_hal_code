@@ -43,12 +43,9 @@ int main(void)
 	short Gyro[3];
 	float Temp;
 	
-  /* 系统时钟初始化成180 MHz */
+  /* 系统时钟初始化成168MHz */
   SystemClock_Config();
-
   LED_GPIO_Config();
-	
-	
 #ifdef USE_LCD_DISPLAY	
 		 /*初始化液晶屏*/
 	ILI9806G_Init ();         //LCD 初始化
@@ -57,23 +54,16 @@ int main(void)
 	//不推荐使用其它模式显示文字	其它模式显示文字会有镜像效果			
 	//其中 6 模式为大部分液晶例程的默认显示方向  
   ILI9806G_GramScan ( 6 );
-
 #endif
-	
 	
   /*初始化USART1*/
   DEBUG_USART_Config(); 
-		
 	//初始化 I2C
 	I2cMaster_Init(); 
-
-	printf("\r\n 欢迎使用秉火  STM32 F407 开发板。\r\n");		 
-
+	printf("\r\n 欢迎使用野火  STM32 F407 开发板。\r\n");		 
 	printf("\r\n 这是一个I2C外设(AT24C02)读写测试例程 \r\n");
-
- 	 	//MPU6050初始化
+ 	 //MPU6050初始化
 	MPU6050_Init();
-	
 	//检测MPU6050
 	if (MPU6050ReadID() == 1)
 	{	
@@ -84,7 +74,6 @@ int main(void)
 				LED2_TOGGLE;
 				Task_Delay[0]=1000;
 			}
-			
 			if(Task_Delay[1]==0)
 			{
 				MPU6050ReadAcc(Acel);
@@ -93,8 +82,6 @@ int main(void)
 				printf("    陀螺仪%8d%8d%8d",Gyro[0],Gyro[1],Gyro[2]);
 				MPU6050_ReturnTemp(&Temp);
 				printf("    温度%8.2f\r\n",Temp);				
-				
-				
 				#ifdef USE_LCD_DISPLAY	
 					{
 						char cStr [ 70 ];
@@ -109,21 +96,10 @@ int main(void)
 
 						sprintf ( cStr, "Tem  :%6.2f",Temp );	//温度值
 						ILI9806G_DispStringLine_EN(LINE(9),cStr);			
-
 					}
-				#endif
-				
-				Task_Delay[1]=500; //更新一次数据，可根据自己的需求，提高采样频率，如100ms采样一次
-				
+				#endif		
+				Task_Delay[1]=500; //更新一次数据，可根据自己的需求，提高采样频率，如100ms采样一次	
 			}
-
-			//*************************************	下面是增加任务的格式************************************//
-	//		if(Task_Delay[i]==0)
-	//		{
-	//			Task(i);
-	//			Task_Delay[i]=;
-	//		}
-
 		}
 
 	}
@@ -134,15 +110,13 @@ int main(void)
 			#ifdef USE_LCD_DISPLAY			
 				/*设置字体颜色及字体的背景颜色*/
 				LCD_SetColors(BLUE,BLACK);	
-
-				ILI9806G_DispStringLine_EN(LINE(4),"No MPU6050 detected! ");			//野火自带的16*24显示
-				ILI9806G_DispStringLine_EN(LINE(5),"Please check the hardware connection! ");			//野火自带的16*24显示
-
+     //野火自带的16*24显示
+				ILI9806G_DispStringLine_EN(LINE(4),"No MPU6050 detected! ");			
+		//野火自带的16*24显示
+				ILI9806G_DispStringLine_EN(LINE(5),"Please check the hardware connection! ");			
 			#endif
 		while(1);	
 	}
-
-
 }
 
 
