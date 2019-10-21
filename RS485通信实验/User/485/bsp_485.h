@@ -5,29 +5,28 @@
 #include <stdio.h>
 
 
-
+/*USART号、时钟、波特率*/
 #define _485_USART                             USART2
 #define _485_USART_CLK_ENABLE()                __USART2_CLK_ENABLE();
 #define _485_USART_BAUDRATE                    115200
 
 #define RCC_PERIPHCLK_485_USART                RCC_PERIPHCLK_USART2
 #define RCC_485_USARTCLKSOURCE_SYSCLK          RCC_USART2CLKSOURCE_SYSCLK
-
+/*RX引脚*/
 #define _485_USART_RX_GPIO_PORT                GPIOA
 #define _485_USART_RX_GPIO_CLK_ENABLE()        __GPIOA_CLK_ENABLE()
 #define _485_USART_RX_PIN                      GPIO_PIN_3
 #define _485_USART_RX_AF                       GPIO_AF7_USART2
-
+/*TX引脚*/
 #define _485_USART_TX_GPIO_PORT                GPIOA
 #define _485_USART_TX_GPIO_CLK_ENABLE()        __GPIOA_CLK_ENABLE()
 #define _485_USART_TX_PIN                      GPIO_PIN_2
 #define _485_USART_TX_AF                       GPIO_AF7_USART2
-
-
+/*485收发控制引脚*/
 #define _485_RE_GPIO_PORT					   GPIOC
 #define _485_RE_GPIO_CLK_ENABLE()              __GPIOC_CLK_ENABLE()
 #define _485_RE_PIN							   GPIO_PIN_0
-
+/*中断相关*/
 #define _485_INT_IRQ                 		   USART2_IRQn
 #define bsp_485_IRQHandler                     USART2_IRQHandler
 

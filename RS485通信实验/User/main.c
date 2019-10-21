@@ -32,23 +32,17 @@ int main(void)
 {
 	char *pbuf;
 	uint16_t len;
-    
-  /* 配置系统时钟为216 MHz */
+  /* 配置系统时钟为168 MHz */
   SystemClock_Config();
-
   /* 初始化RGB彩灯 */
   LED_GPIO_Config();
-
   /* 初始化USART1 配置模式为 115200 8-N-1 */
   DEBUG_USART_Config();
   /*初始化485使用的串口，使用中断模式接收*/
   _485_Config();
-	
 	Key_GPIO_Config();
-	
 	printf("\r\n 欢迎使用秉火  STM32 F407 开发板。\r\n");
   printf("\r\n 秉火F407 485通讯实验例程\r\n");
-	
 	printf("\r\n 实验步骤：\r\n");
 
 	printf("\r\n 1.使用导线连接好两个485通讯设备\r\n");
@@ -96,7 +90,6 @@ int main(void)
 			}
 		}
   }
-
 }
 void Delay(__IO uint32_t nCount)	 //简单的延时函数
 {
