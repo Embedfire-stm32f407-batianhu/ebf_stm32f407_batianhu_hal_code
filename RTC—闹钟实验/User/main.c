@@ -35,7 +35,7 @@
   */
 int main(void)
 {
-    /* 系统时钟初始化成216 MHz */
+    /* 系统时钟初始化成168 MHz */
     SystemClock_Config();
     /* LED 端口初始化 */
     LED_GPIO_Config();
@@ -46,14 +46,14 @@ int main(void)
     printf("\n\r这是一个RTC闹钟实验 \r\n");
 
 #ifdef USE_LCD_DISPLAY	
-	/*=========================液晶初始化开始===============================*/
+	/*===========液晶初始化开始===============*/
 	ILI9806G_Init ();         //LCD 初始化
 
 	//其中0、3、5、6 模式适合从左至右显示文字，
 	//不推荐使用其它模式显示文字	其它模式显示文字会有镜像效果			
 	//其中 6 模式为大部分液晶例程的默认显示方向  
   ILI9806G_GramScan ( 6 );
-  /*=========================液晶初始化结束===============================*/
+  /*=========液晶初始化结束=================*/
 #endif	
 	/*
 	 * 当我们配置过RTC时间之后就往备份寄存器0写入一个数据做标记
@@ -69,11 +69,8 @@ int main(void)
 	{		
 		/* 闹钟设置 */
 		RTC_AlarmSet();
-		
 		/* 设置时间和日期 */
 		RTC_TimeAndDate_Set();
-		
-
 	}
 	else
 	{
@@ -87,7 +84,6 @@ int main(void)
 		{
 		  printf("\r\n 发生外部复位....\r\n");
 		}
-
 		printf("\r\n 不需要重新配置RTC....\r\n");
 
 		/* 使能 PWR 时钟 */
@@ -96,9 +92,7 @@ int main(void)
 		HAL_PWR_EnableBkUpAccess();
 		/* 等待 RTC APB 寄存器同步 */
 		HAL_RTC_WaitForSynchro(&Rtc_Handle);
-
 	} 
-	
 	/* 显示时间和日期 */
 	RTC_TimeAndDate_Show();
 }
