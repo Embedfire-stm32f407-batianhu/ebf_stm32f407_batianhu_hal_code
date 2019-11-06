@@ -8,9 +8,9 @@
 //中断引脚定义
 /*******************************************************/
 
-#define AP_INT_GPIO_PORT                GPIOG
-#define AP_INT_GPIO_CLK_ENABLE()        __GPIOG_CLK_ENABLE();
-#define AP_INT_GPIO_PIN                 GPIO_PIN_12
+#define AP_INT_GPIO_PORT                GPIOE
+#define AP_INT_GPIO_CLK_ENABLE()        __GPIOE_CLK_ENABLE();
+#define AP_INT_GPIO_PIN                 GPIO_PIN_3
 
 /*******************************************************/
 
