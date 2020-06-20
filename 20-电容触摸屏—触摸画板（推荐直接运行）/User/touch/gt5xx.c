@@ -643,14 +643,6 @@ Output:
 
     GTP_DEBUG_FUNC();
 	
-//uint8_t config[GTP_CONFIG_MAX_LENGTH + GTP_ADDR_LENGTH]
-//                = {GTP_REG_CONFIG_DATA >> 8, GTP_REG_CONFIG_DATA & 0xff};
-
-		config = (uint8_t *)malloc (GTP_CONFIG_MAX_LENGTH + GTP_ADDR_LENGTH);
-
-		config[0] = GTP_REG_CONFIG_DATA >> 8;
-		config[1] =  GTP_REG_CONFIG_DATA & 0xff;
-	
     I2C_Touch_Init();
 
     ret = GTP_I2C_Test();
@@ -662,9 +654,16 @@ Output:
 		
 		//获取触摸IC的型号
     GTP_Read_Version(); 
+    
+#if UPDATE_CONFIG
+    
+    config = (uint8_t *)malloc (GTP_CONFIG_MAX_LENGTH + GTP_ADDR_LENGTH);
+
+		config[0] = GTP_REG_CONFIG_DATA >> 8;
+		config[1] =  GTP_REG_CONFIG_DATA & 0xff;
 		
 		//根据IC的型号指向不同的配置
-    	if(touchIC == GT5688)
+    if(touchIC == GT5688)
 		{
 			cfg_info =  CTP_CFG_GT5688; //指向寄存器配置
 			cfg_info_len = CFG_GROUP_LEN(CTP_CFG_GT5688);//计算配置表的大小
@@ -762,14 +761,12 @@ Output:
 	    		GTP_DEBUG("Config success ! i = %d ",i);
 	}
 #endif
-	
-		
+	free(config);
+#endif
 	 /*使能中断，这样才能检测触摸数据*/
 		I2C_GTP_IRQEnable();
 	
     GTP_Get_Info();
-		
-		free(config);
 
     return 0;
 }
