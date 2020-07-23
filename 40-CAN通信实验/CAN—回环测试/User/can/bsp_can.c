@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:野火  STM32 F407 开发板  
+  * 实验平台:秉火  STM32 F407 开发板  
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :http://firestm32.taobao.com
   *
@@ -75,38 +75,30 @@ static void CAN_NVIC_Config(void)
  */
 static void CAN_Mode_Config(void)
 {
-	/********************CAN通信参数设置******************/
+	
+	/************************CAN通信参数设置**********************************/
 	/* 使能CAN时钟 */
-	CAN_CLK_ENABLE();
-	Can_Handle.Instance = CANx;
-	Can_Handle.pTxMsg = &TxMessage;
-	Can_Handle.pRxMsg = &RxMessage;
+    CAN_CLK_ENABLE();
+    
+    Can_Handle.Instance = CANx;
+    Can_Handle.pTxMsg = &TxMessage;
+    Can_Handle.pRxMsg = &RxMessage;
 	/* CAN单元初始化 */
-	//MCR-TTCM  关闭时间触发通信模式使能
-	Can_Handle.Init.TTCM=DISABLE;			   
-	 //MCR-ABOM  自动离线管理
-	Can_Handle.Init.ABOM=ENABLE;			
-	 //MCR-AWUM  使用自动唤醒模式
-	Can_Handle.Init.AWUM=ENABLE;			 
-	//MCR-NART  禁止报文自动重传	  DISABLE-自动重传
-	Can_Handle.Init.NART=DISABLE;			 
-   //MCR-RFLM  接收FIFO 锁定模式  DISABLE-溢出时新报文会覆盖原有报文  
-	Can_Handle.Init.RFLM=DISABLE;			  
-	 //MCR-TXFP  发送FIFO优先级 DISABLE-优先级取决于报文标示符 
-	Can_Handle.Init.TXFP=DISABLE;			  
-	//回环模式
-	Can_Handle.Init.Mode = CAN_MODE_LOOPBACK;  
-	//BTR-SJW 重新同步跳跃宽度 2个时间单元
-	Can_Handle.Init.SJW=CAN_SJW_1TQ;		   
+	Can_Handle.Init.TTCM=DISABLE;			   //MCR-TTCM  关闭时间触发通信模式使能
+	Can_Handle.Init.ABOM=ENABLE;			   //MCR-ABOM  自动离线管理 
+	Can_Handle.Init.AWUM=ENABLE;			   //MCR-AWUM  使用自动唤醒模式
+	Can_Handle.Init.NART=DISABLE;			   //MCR-NART  禁止报文自动重传	  DISABLE-自动重传
+	Can_Handle.Init.RFLM=DISABLE;			   //MCR-RFLM  接收FIFO 锁定模式  DISABLE-溢出时新报文会覆盖原有报文  
+	Can_Handle.Init.TXFP=DISABLE;			   //MCR-TXFP  发送FIFO优先级 DISABLE-优先级取决于报文标示符 
+	Can_Handle.Init.Mode = CAN_MODE_LOOPBACK;  //回环模式
+	Can_Handle.Init.SJW=CAN_SJW_1TQ;		   //BTR-SJW 重新同步跳跃宽度 2个时间单元
 	 
 	/* ss=1 bs1=5 bs2=3 位时间宽度为(1+5+3) 波特率即为时钟周期tq*(1+3+6)  */
-	 //BTR-TS1 时间段1 占用了6个时间单元
-	Can_Handle.Init.BS1=CAN_BS1_5TQ;		  
-	//BTR-TS1 时间段2 占用了3个时间单元	
-	Can_Handle.Init.BS2=CAN_BS2_3TQ;		   
+	Can_Handle.Init.BS1=CAN_BS1_5TQ;		   //BTR-TS1 时间段1 占用了6个时间单元
+	Can_Handle.Init.BS2=CAN_BS2_3TQ;		   //BTR-TS1 时间段2 占用了3个时间单元	
 	
 	/* CAN Baudrate = 1 MBps (1MBps已为stm32的CAN最高速率) (CAN 时钟频率为 APB 1 = 54 MHz) */
-	Can_Handle.Init.Prescaler =6;	//BTR-BRP 波特率分频器  定义了时间单元的时间长度 54/(1+5+3)/5=1 Mbps
+	Can_Handle.Init.Prescaler =6;		   ////BTR-BRP 波特率分频器  定义了时间单元的时间长度 54/(1+5+3)/5=1 Mbps
 	HAL_CAN_Init(&Can_Handle);
 }
 
@@ -122,24 +114,19 @@ static void CAN_Filter_Config(void)
 	CAN_FilterConfTypeDef  CAN_FilterInitStructure;
 
 	/*CAN筛选器初始化*/
-	CAN_FilterInitStructure.FilterNumber=14;	//筛选器组0
-	//工作在掩码模式
-	CAN_FilterInitStructure.FilterMode=CAN_FILTERMODE_IDMASK;	
-	//筛选器位宽为单个32位。
-	CAN_FilterInitStructure.FilterScale=CAN_FILTERSCALE_32BIT;	
+	CAN_FilterInitStructure.FilterNumber=0;						//筛选器组0
+	CAN_FilterInitStructure.FilterMode=CAN_FILTERMODE_IDMASK;	//工作在掩码模式
+	CAN_FilterInitStructure.FilterScale=CAN_FILTERSCALE_32BIT;	//筛选器位宽为单个32位。
 	/* 使能筛选器，按照标志的内容进行比对筛选，扩展ID不是如下的就抛弃掉，是的话，会存入FIFO0。 */
-  //要筛选的ID高位
-	CAN_FilterInitStructure.FilterIdHigh= ((((uint32_t)0x1314<<3)|CAN_ID_EXT|CAN_RTR_DATA)&0xFFFF0000)>>16;	
-	//要筛选的ID低位 
-	CAN_FilterInitStructure.FilterIdLow= (((uint32_t)0x1314<<3)|CAN_ID_EXT|CAN_RTR_DATA)&0xFFFF; 
-	//筛选器高16位每位必须匹配
-	CAN_FilterInitStructure.FilterMaskIdHigh= 0xFFFF;			
-	//筛选器低16位每位必须匹配
-	CAN_FilterInitStructure.FilterMaskIdLow= 0xFFFF;			
-	//筛选器被关联到FIFO0
-	CAN_FilterInitStructure.FilterFIFOAssignment=CAN_FILTER_FIFO0 ;	
-	//使能筛选器
-	CAN_FilterInitStructure.FilterActivation=ENABLE;			
+
+	CAN_FilterInitStructure.FilterIdHigh= ((((uint32_t)0x1314<<3)|
+										 CAN_ID_EXT|CAN_RTR_DATA)&0xFFFF0000)>>16;		//要筛选的ID高位 
+	CAN_FilterInitStructure.FilterIdLow= (((uint32_t)0x1314<<3)|
+									     CAN_ID_EXT|CAN_RTR_DATA)&0xFFFF; //要筛选的ID低位 
+	CAN_FilterInitStructure.FilterMaskIdHigh= 0xFFFF;			//筛选器高16位每位必须匹配
+	CAN_FilterInitStructure.FilterMaskIdLow= 0xFFFF;			//筛选器低16位每位必须匹配
+	CAN_FilterInitStructure.FilterFIFOAssignment=CAN_FILTER_FIFO0 ;	//筛选器被关联到FIFO0
+	CAN_FilterInitStructure.FilterActivation=ENABLE;			//使能筛选器
 	HAL_CAN_ConfigFilter(&Can_Handle,&CAN_FilterInitStructure);
 }
 
