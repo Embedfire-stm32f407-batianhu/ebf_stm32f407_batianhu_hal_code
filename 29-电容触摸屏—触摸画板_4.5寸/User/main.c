@@ -39,6 +39,7 @@ void Printf_Charater(void)   ;
 int main ( void )
 {
   SystemClock_Config();
+	HAL_Init();
   LED_GPIO_Config();
 	ILI9806G_Init ();
 	/* USART config */
