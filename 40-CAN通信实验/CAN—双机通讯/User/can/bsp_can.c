@@ -78,8 +78,8 @@ static void CAN_Mode_Config(void)
 	
 	/************************CAN通信参数设置**********************************/
 	/* 使能CAN时钟 */
-    CAN_CLK_ENABLE();
-    
+    __CAN1_CLK_ENABLE();
+    __CAN2_CLK_ENABLE();
     Can_Handle.Instance = CANx;
     Can_Handle.pTxMsg = &TxMessage;
     Can_Handle.pRxMsg = &RxMessage;
@@ -114,7 +114,7 @@ static void CAN_Filter_Config(void)
 	CAN_FilterConfTypeDef  CAN_FilterInitStructure;
 
 	/*CAN筛选器初始化*/
-	CAN_FilterInitStructure.FilterNumber=0;						//筛选器组0
+	CAN_FilterInitStructure.FilterNumber=14;						//筛选器组0
 	CAN_FilterInitStructure.FilterMode=CAN_FILTERMODE_IDMASK;	//工作在掩码模式
 	CAN_FilterInitStructure.FilterScale=CAN_FILTERSCALE_32BIT;	//筛选器位宽为单个32位。
 	/* 使能筛选器，按照标志的内容进行比对筛选，扩展ID不是如下的就抛弃掉，是的话，会存入FIFO0。 */

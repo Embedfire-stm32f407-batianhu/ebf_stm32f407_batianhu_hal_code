@@ -32,17 +32,17 @@ __IO uint32_t flag = 0;		 //用于标志是否接收到数据，在中断函数中赋值
 int main(void)
 {
 	/* 配置系统时钟为168 MHz */
-    SystemClock_Config();
+  SystemClock_Config();
 	/* 初始化LED */
 	LED_GPIO_Config();	
+
+    /*初始化can,在中断接收CAN数据包*/
+	CAN_Config();
 	/* 初始化调试串口，一般为串口1 */
 	DEBUG_USART_Config();	
-    /*初始化can,在中断接收CAN数据包*/
-    CAN_Config();
+	printf("\r\n 欢迎使用野火  STM32 F407 开发板。\r\n");
+	printf("\r\n 野火 F407 CAN通讯实验例程\r\n");
 
-    printf("\r\n 欢迎使用野火  STM32 F407 开发板。\r\n");
-    printf("\r\n 野火F407 CAN通讯实验例程\r\n");
-	
 	printf("\r\n 实验步骤：\r\n");
 
 	printf("\r\n 1.使用导线连接好两个CAN讯设备\r\n");
@@ -61,7 +61,6 @@ int main(void)
 			/* 开始发送数据 */
 			HAL_CAN_Transmit_IT(&Can_Handle);
 			HAL_Delay(100);
-			LED_RGBOFF;			
 		}
 		if(flag==1)
 		{				
@@ -137,12 +136,12 @@ int main(void)
     while(1) {};
   }
 
-  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
-  if (HAL_GetREVID() == 0x1001)
-  {
-    /* Enable the Flash prefetch */
-    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
-  }
+//  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+//  if (HAL_GetREVID() == 0x1001)
+//  {
+//    /* Enable the Flash prefetch */
+//    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+//  }
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

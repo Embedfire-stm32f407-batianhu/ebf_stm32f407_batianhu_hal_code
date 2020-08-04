@@ -681,7 +681,7 @@ Output:
 		GTP_DEBUG("cfg_info_len = %d ",cfg_info_len);
 		GTP_DEBUG("cfg_num = %d ",cfg_num);
 		GTP_DEBUG_ARRAY(config,6);
-		
+	  HAL_Delay(5);
 		/*根据LCD的扫描方向设置分辨率*/
 		config[GTP_ADDR_LENGTH+1] = LCD_X_LENGTH & 0xFF;
 		config[GTP_ADDR_LENGTH+2] = LCD_X_LENGTH >> 8;
@@ -709,6 +709,7 @@ Output:
 		}
 		
 		check_sum = 0 - check_sum;
+		HAL_Delay(5);
 		GTP_DEBUG("Config checksum: 0x%04X", check_sum);
 		//更新checksum
 		config[(cfg_num+GTP_ADDR_LENGTH -3)] = (check_sum >> 8) & 0xFF;
