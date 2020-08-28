@@ -40,7 +40,7 @@ int main ( void )
   LED_GPIO_Config();
 	NT35510_Init ();         //LCD 初始化
 	DEBUG_USART_Config();		
-	printf("\r\n ********** 液晶屏英文显示程序*********** \r\n"); 
+	printf("\r\n ********** 液晶坐标方向演示 *********** \r\n"); 
 	printf("\r\n 本程序不支持中文，显示中文的程序请学习下一章 \r\n"); 
 	while ( 1 )
 	{
